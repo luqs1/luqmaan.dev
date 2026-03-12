@@ -1,0 +1,316 @@
+/* Seeds for Gaza — Arabic text only */
+@font-face {
+  font-family: 'Seeds for Gaza';
+  src: url('/fonts/Seeds_for_Gaza-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Seeds for Gaza';
+  src: url('/fonts/Seeds_for_Gaza-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  background: #ffffff;
+  color: #000000;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Layout */
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.site-logo {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+}
+
+.site-logo:hover {
+  color: #000000;
+}
+
+.nav-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #777777;
+  text-decoration: none;
+  transition: color 0.1s;
+}
+
+.nav-link:hover {
+  color: #000000;
+}
+
+.nav-link.active {
+  color: #E53935;
+}
+
+/* Bio / subtitle */
+.page-subtitle {
+  font-size: 14px;
+  color: #777777;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* Post list */
+.post-list {
+  list-style: none;
+  width: 100%;
+}
+
+.post-list-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid #E4E4E4;
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-list-item:first-child {
+  border-top: 1px solid #E4E4E4;
+}
+
+.post-list-item:hover .post-title {
+  color: #E53935;
+}
+
+.post-date {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 12px;
+  color: #777777;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.post-title {
+  font-size: 14px;
+  color: #000000;
+  flex: 1;
+  transition: color 0.1s;
+}
+
+.post-arrow {
+  font-size: 14px;
+  color: #777777;
+  flex-shrink: 0;
+}
+
+/* Connect page rows */
+.connect-list {
+  list-style: none;
+  width: 100%;
+}
+
+.connect-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid #E4E4E4;
+}
+
+.connect-item:first-child {
+  border-top: 1px solid #E4E4E4;
+}
+
+.connect-label {
+  flex: 1;
+}
+
+.connect-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.connect-desc {
+  font-size: 12px;
+  color: #777777;
+}
+
+.connect-link {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 12px;
+  color: #E53935;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.connect-link:hover {
+  text-decoration: underline;
+}
+
+/* Blog post */
+.post-header {
+  margin-bottom: 40px;
+}
+
+.post-back {
+  display: inline-block;
+  font-size: 13px;
+  color: #777777;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.post-back:hover {
+  color: #000000;
+}
+
+.post-meta-date {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 12px;
+  color: #777777;
+  margin-bottom: 12px;
+}
+
+.post-heading {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #000000;
+}
+
+/* Post body */
+.post-body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #000000;
+}
+
+.post-body p {
+  margin-bottom: 20px;
+}
+
+.post-body h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 32px 0 12px;
+  color: #000000;
+}
+
+.post-body h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 24px 0 8px;
+  color: #000000;
+}
+
+.post-body ul, .post-body ol {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.post-body li {
+  margin-bottom: 6px;
+}
+
+.post-body hr {
+  border: none;
+  border-top: 1px solid #E4E4E4;
+  margin: 32px 0;
+}
+
+.post-body a {
+  color: #E53935;
+  text-decoration: none;
+}
+
+.post-body a:hover {
+  text-decoration: underline;
+}
+
+.post-body code {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 14px;
+  background: #f5f5f5;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+.post-body pre {
+  background: #f5f5f5;
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  border: 1px solid #E4E4E4;
+}
+
+.post-body pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Arabic text — Seeds for Gaza font */
+.arabic {
+  font-family: 'Seeds for Gaza', 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.4em;
+  line-height: 2;
+  direction: rtl;
+  display: block;
+  text-align: right;
+  margin: 24px 0;
+  color: #000000;
+}
+
+/* Utility */
+.mono {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .page {
+    padding: 32px 20px 60px;
+  }
+
+  .post-heading {
+    font-size: 22px;
+  }
+
+  .post-date {
+    display: none;
+  }
+}

@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+function formatDate(date: Date): string {
+  return date.toISOString().split('T')[0]; // YYYY-MM-DD
+}
+---
+
+<Base title="luqmaan.dev">
+  <main class="page">
+    <header class="site-header">
+      <a href="/" class="site-logo">luqmaan.dev</a>
+      <a href="/connect" class="nav-link">connect →</a>
+    </header>
+
+    <p class="page-subtitle">
+      Engineer, reader, builder. Writing about technology, society, and the things in between.
+    </p>
+
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <a href={`/writing/${post.id}`} class="post-list-item">
+            <span class="post-date">{formatDate(post.data.date)}</span>
+            <span class="post-title">{post.data.title}</span>
+            <span class="post-arrow">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  description: string;
+}
+
+const { title, date, description } = Astro.props;
+
+function formatDate(d: Date): string {
+  return d.toISOString().split('T')[0];
+}
+---
+
+<header class="site-header">
+  <a href="/" class="site-logo">luqmaan.dev</a>
+  <a href="/connect" class="nav-link">connect →</a>
+</header>
+
+<div class="post-header">
+  <a href="/" class="post-back">← writing</a>
+  <div class="post-meta-date">{formatDate(date)}</div>
+  <h1 class="post-heading">{title}</h1>
+</div>
+
+<article class="post-body">
+  <slot />
+</article>
