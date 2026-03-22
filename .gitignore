@@ -3,6 +3,12 @@ dist/
 # generated types
 .astro/
 
+# Playwright CLI
+.playwright-cli
+
+# Agent transcripts
+.agents/transcripts
+
 # dependencies
 node_modules/
 
