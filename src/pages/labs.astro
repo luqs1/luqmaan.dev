@@ -33,7 +33,8 @@ import Base from '../layouts/Base.astro';
         </div>
         <div class="setup-install">
           <p class="setup-label">Install the workshop skill:</p>
-          <pre><code>curl -sL https://luqmaan.dev/skills/agents-assemble.md \
+          <pre><code>mkdir -p ~/.claude/commands && \
+curl -sL https://luqmaan.dev/skills/agents-assemble.md \
   -o ~/.claude/commands/agents-assemble.md</code></pre>
           <p class="setup-label">Then in Claude Code, type:</p>
           <pre><code>/agents-assemble</code></pre>
@@ -48,7 +49,8 @@ import Base from '../layouts/Base.astro';
         </div>
         <div class="setup-install">
           <p class="setup-label">Install the workshop skill:</p>
-          <pre><code>curl -sL https://luqmaan.dev/skills/agents-assemble.md \
+          <pre><code>mkdir -p ~/.opencode/skills && \
+curl -sL https://luqmaan.dev/skills/agents-assemble.md \
   -o ~/.opencode/skills/agents-assemble.md</code></pre>
           <p class="setup-label">Then start OpenCode and ask it to:</p>
           <pre><code>Run the agents-assemble skill</code></pre>
