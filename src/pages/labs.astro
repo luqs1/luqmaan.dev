@@ -1,0 +1,258 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="labs — luqmaan.dev"
+  description="Agents Assemble: Hulm Club Tech Guild workshop labs. Connect an agent to the real world, write skills, and build your own workflows."
+>
+  <main class="page">
+    <header class="site-header">
+      <a href="/" class="site-logo">luqmaan.dev</a>
+      <a href="/connect" class="nav-link">connect →</a>
+    </header>
+
+    <h1 class="labs-title">Agents Assemble</h1>
+    <p class="labs-event">Hulm Club Tech Guild — 1 April 2026</p>
+
+    <p class="labs-intro">
+      Tonight you'll go from assistant to agent. Your agent will walk you through three labs — you just need to get it set up and hand it the skill file. It'll take it from there.
+    </p>
+
+    <section class="labs-setup">
+      <h2 class="labs-heading">Get Set Up</h2>
+
+      <p class="labs-text">Pick your tool, then run the install command below to give your agent the workshop skill.</p>
+
+      <div class="setup-path">
+        <h3 class="setup-name">Claude Code</h3>
+        <p class="setup-desc">For Anthropic Max / Pro subscribers.</p>
+        <div class="setup-warning">
+          <strong>Privacy:</strong> Claude Code may use your conversations to improve Claude by default.
+          To turn this off: open Claude Code → type <code>/config</code> → go to <strong>Privacy</strong> → disable <strong>"Improve Claude"</strong>.
+        </div>
+        <div class="setup-install">
+          <p class="setup-label">Install the workshop skill:</p>
+          <pre><code>curl -sL https://luqmaan.dev/skills/agents-assemble.md \
+  -o ~/.claude/commands/agents-assemble.md</code></pre>
+          <p class="setup-label">Then in Claude Code, type:</p>
+          <pre><code>/agents-assemble</code></pre>
+        </div>
+      </div>
+
+      <div class="setup-path">
+        <h3 class="setup-name">OpenCode</h3>
+        <p class="setup-desc">Free and open-source. Works with free models via OpenRouter.</p>
+        <div class="setup-warning warning-caution">
+          <strong>Data warning:</strong> If you're using free models through OpenRouter, your prompts are sent to third-party model providers. <strong>Do not enter sensitive personal data, passwords, or private information.</strong> Your data may be used for training by the model provider.
+        </div>
+        <div class="setup-install">
+          <p class="setup-label">Install the workshop skill:</p>
+          <pre><code>curl -sL https://luqmaan.dev/skills/agents-assemble.md \
+  -o ~/.opencode/skills/agents-assemble.md</code></pre>
+          <p class="setup-label">Then start OpenCode and ask it to:</p>
+          <pre><code>Run the agents-assemble skill</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="labs-overview">
+      <h2 class="labs-heading">The Labs</h2>
+      <p class="labs-text">Your agent will guide you through each of these. The detail is in the skill file — here's the overview.</p>
+
+      <div class="lab-card">
+        <span class="lab-number">01</span>
+        <h3 class="lab-name">Connect to Something Real</h3>
+        <p class="lab-desc">
+          Give your agent a browser. It'll open a real webpage, navigate it, read the content, and do something useful with what it finds. You'll see it happen live.
+        </p>
+        <p class="lab-time">~25 min</p>
+      </div>
+
+      <div class="lab-card">
+        <span class="lab-number">02</span>
+        <h3 class="lab-name">Make It Repeatable</h3>
+        <p class="lab-desc">
+          Take what you just did and write it as a skill — a plain-English recipe your agent can follow on command. No code. Just instructions.
+        </p>
+        <p class="lab-time">~25 min</p>
+      </div>
+
+      <div class="lab-card">
+        <span class="lab-number">03</span>
+        <h3 class="lab-name">Define Your Own</h3>
+        <p class="lab-desc">
+          Think about a real workflow from your life or work. Build a skill for it. This one's yours.
+        </p>
+        <p class="lab-time">~15 min</p>
+      </div>
+    </section>
+
+    <section class="labs-wifi">
+      <h2 class="labs-heading">WiFi</h2>
+      <p class="labs-text">
+        <strong>SSID:</strong> HulmClubMembers<br/>
+        <strong>Password:</strong> 123salam
+      </p>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .labs-title {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #000000;
+    margin-bottom: 4px;
+  }
+
+  .labs-event {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 12px;
+    color: #777777;
+    margin-bottom: 24px;
+  }
+
+  .labs-intro {
+    font-size: 15px;
+    color: #000000;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .labs-heading {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 12px;
+  }
+
+  .labs-text {
+    font-size: 14px;
+    color: #777777;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .labs-setup {
+    margin-bottom: 48px;
+  }
+
+  .setup-path {
+    border: 1px solid #E4E4E4;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .setup-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 4px;
+  }
+
+  .setup-desc {
+    font-size: 13px;
+    color: #777777;
+    margin-bottom: 12px;
+  }
+
+  .setup-warning {
+    font-size: 13px;
+    color: #000000;
+    background: #f5f5f5;
+    padding: 12px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .setup-warning code {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 12px;
+    background: #E4E4E4;
+    padding: 1px 4px;
+    border-radius: 2px;
+  }
+
+  .warning-caution {
+    background: #fff8e1;
+  }
+
+  .setup-install {
+    margin-top: 12px;
+  }
+
+  .setup-label {
+    font-size: 13px;
+    color: #777777;
+    margin-bottom: 6px;
+  }
+
+  .setup-install pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .setup-install pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+
+  .labs-overview {
+    margin-bottom: 48px;
+  }
+
+  .lab-card {
+    padding: 20px 0;
+    border-bottom: 1px solid #E4E4E4;
+  }
+
+  .lab-card:first-of-type {
+    border-top: 1px solid #E4E4E4;
+  }
+
+  .lab-number {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 12px;
+    color: #E53935;
+    font-weight: 500;
+  }
+
+  .lab-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    margin: 4px 0 8px;
+  }
+
+  .lab-desc {
+    font-size: 14px;
+    color: #777777;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .lab-time {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 12px;
+    color: #777777;
+  }
+
+  .labs-wifi {
+    margin-bottom: 40px;
+  }
+
+  .labs-wifi .labs-text strong {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 12px;
+  }
+</style>
