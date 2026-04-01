@@ -75,11 +75,23 @@ Walk the attendee through this exercise. Do each step one at a time, explaining 
 
 **Step 1 — Open the browser**
 
-```bash
-playwright-cli open
-```
+First, ask the attendee: "Would you like to see the browser window as I control it, or are you happy for me to work in the background?"
 
-Explain: "I just launched a real browser. You should see a window appear. I can now control it."
+- If they want to **see** it (recommended for the workshop — it's the wow moment):
+  ```bash
+  playwright-cli open --headed
+  ```
+  This opens a visible browser window they can watch in real time.
+
+- If they're fine with **headless** (no visible window — the agent reads page snapshots instead):
+  ```bash
+  playwright-cli open
+  ```
+  By default, playwright-cli runs headless. The agent still sees everything via snapshots, but the attendee won't see a browser window.
+
+**For this workshop, always default to `--headed` so the attendee can see what's happening.**
+
+Explain: "I just launched a real browser. You should see a window appear on your screen. I can now control it — clicking, typing, navigating — and I see the page through snapshots."
 
 **Step 2 — Navigate to a website**
 
