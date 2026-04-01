@@ -19,6 +19,10 @@ import Base from '../layouts/Base.astro';
       Tonight you'll go from assistant to agent. Your agent will walk you through three labs — you just need to get it set up and hand it the skill file. It'll take it from there.
     </p>
 
+    <p class="labs-slides">
+      <a href="https://gamma.app/docs/Agents-Assemble-h0dui9kppybrotu?mode=doc" target="_blank" rel="noopener noreferrer">View the slides →</a>
+    </p>
+
     <section class="labs-setup">
       <h2 class="labs-heading">Get Set Up</h2>
 
@@ -120,7 +124,22 @@ curl -sL https://luqmaan.dev/skills/agents-assemble.md \
     font-size: 15px;
     color: #000000;
     line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .labs-slides {
     margin-bottom: 40px;
+  }
+
+  .labs-slides a {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 13px;
+    color: #E53935;
+    text-decoration: none;
+  }
+
+  .labs-slides a:hover {
+    text-decoration: underline;
   }
 
   .labs-heading {
