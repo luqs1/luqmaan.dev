@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BARBICAN — Interactive Estate Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.min.js",
+    "three/addons/": "./vendor/addons/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- loader -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-word">BARBICAN</div>
+    <div class="loader-bar"><span></span></div>
+    <div class="loader-sub">POURING CONCRETE — CRIPPLEGATE, EC2Y</div>
+  </div>
+</div>
+
+<!-- title block -->
+<header id="masthead">
+  <div class="mast-chip"></div>
+  <h1>BARBICAN</h1>
+  <div class="mast-meta">
+    <span>CHAMBERLIN POWELL &amp; BON — 1965–1976</span>
+    <span>CITY OF LONDON EC2Y · 51.520°N 0.094°W</span>
+  </div>
+</header>
+
+<!-- info panel -->
+<aside id="panel">
+  <div class="panel-head">
+    <span id="panel-kicker">THE ESTATE</span>
+    <button id="panel-close" title="back to estate">×</button>
+  </div>
+  <h2 id="panel-name">The Barbican Estate</h2>
+  <div class="panel-stats" id="panel-stats"></div>
+  <p id="panel-body"></p>
+  <div class="panel-foot" id="panel-foot">CLICK ANY BUILDING TO EXPLORE</div>
+</aside>
+
+<!-- control deck -->
+<div id="deck">
+  <div class="deck-row views">
+    <button class="view-btn is-active" data-view="overview">OVERVIEW</button>
+    <button class="view-btn" data-view="lakeside">LAKESIDE</button>
+    <button class="view-btn" data-view="podium">PODIUM</button>
+    <button class="view-btn" data-view="towers">TOWERS</button>
+  </div>
+  <div class="deck-row time">
+    <span class="sun-glyph" id="sun-glyph">☀</span>
+    <input type="range" id="time-slider" min="5" max="22" step="0.25" value="14.5" />
+    <span class="time-readout" id="time-readout">14:30</span>
+  </div>
+  <div class="deck-row toggles">
+    <button class="tog is-active" id="tog-labels">LABELS</button>
+    <button class="tog is-active" id="tog-shadows">SHADOWS</button>
+    <span class="hint">DRAG ORBIT · SCROLL ZOOM · RIGHT-DRAG PAN</span>
+  </div>
+</div>
+
+<!-- hover tooltip -->
+<div id="tip"></div>
+
+<div id="credit">FOOTPRINTS © OPENSTREETMAP CONTRIBUTORS (ODbL) · VAULTS &amp; CROWNS PROCEDURAL · HEIGHTS PARTLY ESTIMATED</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
