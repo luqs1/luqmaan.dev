@@ -600,8 +600,12 @@ renderer.domElement.addEventListener('pointerup', (e) => {
   const moved = Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]);
   downAt = null;
   if (moved > 6) return;
-  if (hovered) showBuilding(hovered.userData);
-  else showEstate();
+  // raycast from the tap itself — mobile users never hover
+  mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+  ray.setFromCamera(mouse, camera);
+  const hit = ray.intersectObjects(interactive, false)[0]?.object;
+  if (hit) showBuilding(hit.userData);
+  else if (!panel.classList.contains('collapsed')) showEstate();
 });
 
 const panel = document.getElementById('panel');
@@ -620,6 +624,7 @@ function showEstate() {
   el('panel-foot').textContent = ESTATE_INFO.foot;
 }
 function showBuilding(ud) {
+  openPanel();
   panel.classList.add('has-building');
   const info = ud.info;
   el('panel-kicker').textContent = info?.kicker || (ud.estate ? 'BARBICAN ESTATE' : 'CITY CONTEXT');
@@ -632,7 +637,16 @@ function showBuilding(ud) {
   el('panel-body').textContent = info?.body || 'No dossier on this one — an unremarkable neighbour of the estate. Footprint and height from OpenStreetMap.';
   el('panel-foot').textContent = ud.estate ? 'GRADE II LISTED ENSEMBLE' : 'OUTSIDE THE LISTED ESTATE';
 }
-document.getElementById('panel-close').addEventListener('click', showEstate);
+const openBtn = document.getElementById('panel-open');
+function openPanel() {
+  panel.classList.remove('collapsed');
+  openBtn.hidden = true;
+}
+document.getElementById('panel-close').addEventListener('click', () => {
+  panel.classList.add('collapsed');
+  openBtn.hidden = false;
+});
+openBtn.addEventListener('click', openPanel);
 
 // ============================================================ loop
 const clock = new THREE.Clock();

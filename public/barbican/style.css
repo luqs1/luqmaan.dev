@@ -91,9 +91,16 @@ html, body {
 #panel-close {
   border: none; background: none; font: 700 18px/1 var(--sans);
   cursor: pointer; color: var(--ink); padding: 0 2px;
-  display: none;
 }
-#panel.has-building #panel-close { display: block; }
+#panel.collapsed { display: none; }
+#panel-open {
+  position: fixed; top: 22px; right: 24px; z-index: 10;
+  border: 2px solid var(--ink); background: var(--orange); cursor: pointer;
+  font-family: var(--mono); font-weight: 600; font-size: 11px; letter-spacing: .16em;
+  padding: 7px 12px; color: var(--ink);
+  box-shadow: 4px 4px 0 rgba(23,19,14,.8);
+}
+#panel-open[hidden] { display: none; }
 #panel h2 {
   font-family: var(--disp); font-size: 21px; line-height: 1.05;
   padding: 12px 14px 8px; letter-spacing: -0.01em;
