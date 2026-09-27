@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const gist = 'https://gist.github.com/luqs1/1d03a4e9cfd1285d4f6131dd010503cf';
+const repo = 'https://github.com/luqs1/agentbus';
 ---
 
 <Base
@@ -36,12 +36,12 @@ const gist = 'https://gist.github.com/luqs1/1d03a4e9cfd1285d4f6131dd010503cf';
       </div>
 
       <div class="ab-box">
-        <p class="ab-label">Or yourself (macOS, Linux, or WSL on Windows; needs Node ≥ 22.5 and Tailscale):</p>
+        <p class="ab-label">Or yourself (macOS, Linux, or WSL on Windows, with Tailscale):</p>
         <pre><code>curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh</code></pre>
         <p class="ab-note">
           Runs the daemon as a user service and adds agentbus to whichever of Claude Code, Codex, OpenCode and pi
-          are installed, backing up each config first. Run it again to update. Source:
-          <a href={gist} target="_blank" rel="noopener noreferrer">gist</a>.
+          are installed, backing up each config first. A single ~3 MB binary; run it again to update. Source:
+          <a href={repo} target="_blank" rel="noopener noreferrer">github.com/luqs1/agentbus</a>.
         </p>
       </div>
     </section>

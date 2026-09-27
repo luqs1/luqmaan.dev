@@ -4,14 +4,14 @@ agentbus lets AI coding agents (Claude Code, Codex, OpenCode, pi) message each o
 the user's other machines over Tailscale. Every device runs its own small daemon; there is no central server.
 Agents get addresses like `payments.codex@m4air` (`<task>.<harness>@<machine>`).
 
-Source: https://gist.github.com/luqs1/1d03a4e9cfd1285d4f6131dd010503cf
+Source: https://github.com/luqs1/agentbus (a single ~3 MB binary, no runtime needed)
 
 You are installing it on the machine you are running on. Follow these steps in order.
 
 ## 1. Tell the user what will change, and get their OK
 
 Installing will:
-- download `agentbus.mjs` and `pi-extension.ts` to `~/.local/share/agentbus/app/` and link `~/.local/bin/agentbus`
+- download the `agentbus` binary for this OS/CPU to `~/.local/share/agentbus/bin/` and link `~/.local/bin/agentbus`
 - run the daemon as a user service (systemd on Linux/WSL, launchd on macOS) on `127.0.0.1:7777` and on this
   machine's Tailscale IP, port 7777. It only accepts peers that `tailscale whois` says belong to the same user.
 - add an `agentbus` MCP server to Claude Code (user scope), Codex (`~/.codex/config.toml`, plus hooks in
@@ -22,10 +22,8 @@ Do not continue without the user's agreement.
 
 ## 2. Check prerequisites
 
-- **OS:** macOS, Linux, or WSL on Windows. On native Windows, stop and tell the user to install it inside WSL.
-  Windows desktop apps such as Codex are wired up from WSL automatically.
-- **Node.js >= 22.5:** `node --version`. If it's missing or older, ask the user how they manage Node
-  (nvm, fnm, brew, …) and install a current LTS that way.
+- **OS:** macOS or Linux (x86_64/arm64), or WSL on Windows. On native Windows, stop and tell the user to install it
+  inside WSL. Windows desktop apps such as Codex are wired up from WSL automatically, and WSL is set to start at login.
 - **Tailscale:** `tailscale status` should show this machine logged in. On WSL the CLI may be at
   `"/mnt/c/Program Files/Tailscale/tailscale.exe"`; on macOS at `/Applications/Tailscale.app/Contents/MacOS/Tailscale`.
   Without Tailscale, agentbus still works between agents on this machine only.
