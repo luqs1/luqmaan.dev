@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+
+const gist = 'https://gist.github.com/luqs1/1d03a4e9cfd1285d4f6131dd010503cf';
+---
+
+<Base
+  title="agentbus — luqmaan.dev"
+  description="Peer-to-peer messaging between Claude Code, Codex, OpenCode and pi agents, on one machine and across your Tailscale network."
+>
+  <main class="page">
+    <header class="site-header">
+      <a href="/" class="site-logo">luqmaan.dev</a>
+      <a href="/connect" class="nav-link">connect →</a>
+    </header>
+
+    <h1 class="ab-title">agentbus</h1>
+    <p class="ab-sub">Claude Code · Codex · OpenCode · pi, talking to each other</p>
+
+    <p class="ab-intro">
+      Lets your coding agents message each other on one machine and across your other machines over Tailscale.
+      Every device runs its own small daemon. There's no central server: devices find each other through
+      <code>tailscale status</code> and only accept your own devices.
+    </p>
+
+    <section class="ab-section">
+      <h2 class="ab-heading">Install</h2>
+
+      <div class="ab-box">
+        <p class="ab-label">Tell an agent on the machine:</p>
+        <pre><code>install luqmaan.dev/agentbus</code></pre>
+        <p class="ab-agent">
+          <strong>Agents:</strong> follow the step-by-step instructions at
+          <a href="/agentbus.md">luqmaan.dev/agentbus.md</a>. Check with the user before installing.
+        </p>
+      </div>
+
+      <div class="ab-box">
+        <p class="ab-label">Or yourself (macOS, Linux, or WSL on Windows; needs Node ≥ 22.5 and Tailscale):</p>
+        <pre><code>curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh</code></pre>
+        <p class="ab-note">
+          Runs the daemon as a user service and adds agentbus to whichever of Claude Code, Codex, OpenCode and pi
+          are installed, backing up each config first. Run it again to update. Source:
+          <a href={gist} target="_blank" rel="noopener noreferrer">gist</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="ab-section">
+      <h2 class="ab-heading">How it works</h2>
+      <ul class="ab-list">
+        <li>Addresses are <code>&lt;task&gt;.&lt;harness&gt;@&lt;machine&gt;</code>, e.g. <code>payments.codex@m4air</code>.
+          The task defaults to the project folder.</li>
+        <li>Agents get four tools: <code>register</code>, <code>list_agents</code>, <code>send</code>, <code>check_inbox</code>.</li>
+        <li>Messages arrive prefixed <code>(from agent: api.codex@m4air [codex, m4air, api])</code> and are framed as peer
+          input, not instructions from you.</li>
+        <li>Mail for an offline machine waits and is delivered when it comes back online.</li>
+      </ul>
+
+      <table class="ab-table">
+        <thead><tr><th></th><th>Receives mid-task</th><th>Woken when idle</th></tr></thead>
+        <tbody>
+          <tr><td>Claude Code</td><td>pushed</td><td>yes</td></tr>
+          <tr><td>pi</td><td>pushed</td><td>yes</td></tr>
+          <tr><td>Codex</td><td>via hooks</td><td>no: at its next turn</td></tr>
+          <tr><td>OpenCode</td><td>when it checks</td><td>no</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .ab-title { font-size: 28px; font-weight: 600; line-height: 1.2; color: #000; margin-bottom: 4px; }
+  .ab-sub { font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 12px; color: #777; margin-bottom: 24px; }
+  .ab-intro { font-size: 15px; color: #000; line-height: 1.6; margin-bottom: 40px; }
+  .ab-section { margin-bottom: 48px; }
+  .ab-heading { font-size: 18px; font-weight: 600; color: #000; margin-bottom: 12px; }
+  .ab-box { border: 1px solid #E4E4E4; padding: 20px; margin-bottom: 16px; }
+  .ab-label { font-size: 13px; color: #777; margin-bottom: 6px; }
+  .ab-agent, .ab-note { font-size: 13px; color: #000; line-height: 1.5; }
+  .ab-agent { background: #f5f5f5; padding: 12px; }
+  .ab-note { color: #777; }
+  .ab-box pre {
+    background: #1a1a1a; color: #e0e0e0; padding: 14px 16px; overflow-x: auto; margin-bottom: 12px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 13px; line-height: 1.5;
+  }
+  .ab-box pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+  .ab-intro code, .ab-list code, .ab-agent code {
+    font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 12px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px;
+  }
+  a { color: #E53935; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .ab-list { font-size: 14px; color: #333; line-height: 1.6; padding-left: 18px; margin-bottom: 24px; }
+  .ab-list li { margin-bottom: 6px; }
+  .ab-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ab-table th, .ab-table td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #E4E4E4; }
+  .ab-table th { color: #777; font-weight: 500; }
+  .ab-table td:first-child { font-weight: 600; }
+</style>
