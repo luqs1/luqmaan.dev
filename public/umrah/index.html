@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Umrah — Shafi'i Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Alegreya+Sans:wght@500;700&family=IBM+Plex+Mono:wght@500;600&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --tint:#EDF1F6;
+  --tint-2:#E2E8F0;
+  --ink:#0A0E14;
+  --ink-2:#3C4654;
+  --indigo:#123A8E;
+  --jade:#0B6B4A;
+  --crimson:#A11220;
+  --amber:#9A5B00;
+  --sp:clamp(15px,4.2vw,20px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--paper)}
+body{
+  color:var(--ink);
+  font-family:"Alegreya Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:500;font-size:18px;line-height:1.44;
+  -webkit-text-size-adjust:100%;
+  padding-bottom:calc(74px + env(safe-area-inset-bottom));
+}
+h1,h2,h3,.mono,nav button{font-family:"Archivo",system-ui,sans-serif}
+h1,h2,h3{margin:0;letter-spacing:-.015em}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* ---- header ---- */
+header{
+  padding:calc(16px + env(safe-area-inset-top)) var(--sp) 14px;
+  border-bottom:3px solid var(--ink);
+}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--indigo);margin:0 0 4px}
+header h1{font-size:26px;font-weight:800}
+
+/* ---- panels ---- */
+main{padding:0 var(--sp)}
+.panel{display:none;padding:16px 0 30px}
+.panel.on{display:block}
+.head{display:flex;align-items:baseline;gap:9px;margin-bottom:12px}
+.head .num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;
+  color:#fff;background:var(--indigo);padding:4px 7px;border-radius:2px;letter-spacing:.06em}
+.head h2{font-size:24px;font-weight:800}
+
+/* ---- blocks ---- */
+.block{border:2px solid var(--ink);border-radius:4px;padding:13px 14px;margin:0 0 13px;background:var(--paper)}
+.block.fill{background:var(--tint);border-color:var(--tint-2)}
+.block h3{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+ul{margin:0;padding-left:1.15em}
+li{margin-bottom:8px}
+li:last-child{margin-bottom:0}
+p{margin:0 0 9px}
+p:last-child{margin-bottom:0}
+
+.tag{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 6px;border-radius:2px;color:#fff}
+.t-rukn{background:var(--crimson)}
+.t-sunnah{background:var(--jade)}
+.t-cond{background:var(--amber)}
+
+.flag{border:2px solid var(--crimson);border-radius:4px;padding:11px 13px;margin:0 0 13px;background:#FFF4F4}
+.flag b{color:var(--crimson);font-family:"Archivo",sans-serif;font-size:13px;
+  text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px}
+
+/* ---- term buttons ---- */
+.term{
+  font:inherit;color:var(--indigo);background:none;border:0;padding:0;cursor:pointer;
+  font-weight:700;border-bottom:2px solid #A9BEE4;
+}
+.term::after{content:"›";font-size:.85em;margin-left:2px;opacity:.7}
+.term:active{background:#DCE6F7}
+.term:focus-visible{outline:3px solid var(--indigo);outline-offset:2px}
+
+/* ---- 3D viewer ---- */
+.stage{
+  border:2px solid var(--ink);border-radius:4px 4px 0 0;height:318px;position:relative;
+  overflow:hidden;background:linear-gradient(180deg,#F7FAFD 0%,#EDF1F6 62%,#E2E8F0 62%,#EAEFF4 100%);
+  perspective:950px;perspective-origin:50% 34%;
+  touch-action:pan-y;cursor:grab;
+}
+.stage.grabbing{cursor:grabbing}
+.world{
+  position:absolute;left:50%;top:58%;width:0;height:0;
+  transform-style:preserve-3d;
+  transform:rotateX(-24deg) rotateY(var(--yaw,-45deg));
+  transition:transform .55s cubic-bezier(.3,.7,.3,1);
+}
+.world *{position:absolute;transform-style:preserve-3d}
+.floor{
+  left:-190px;top:-190px;width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle at 50% 42%, #FDFDFB 0%, #F1EFE8 55%, #E4E1D6 100%);
+  border:2px solid #CFCBBC;
+  transform:rotateX(90deg);
+}
+.floor2{
+  left:-136px;top:-136px;width:272px;height:272px;border-radius:50%;
+  border:2px dashed #B9C4D4;transform:rotateX(90deg) translateZ(1px);
+}
+.face{background:#101521;border:1px solid #000}
+.face .hizam{position:absolute;left:0;right:0;top:20%;height:11%;
+  background:linear-gradient(180deg,#E4B41F,#B8880E);}
+.face .script{position:absolute;left:6%;right:6%;top:23%;height:5%;
+  background:repeating-linear-gradient(90deg,#7A5A05 0 6px,transparent 6px 11px);opacity:.55}
+.door{
+  background:linear-gradient(180deg,#E9BE2E,#A87E0C);border:1px solid #6E5306;
+  width:22px;height:46px;
+}
+.hijrseg{background:#DDD8CA;border:1px solid #A8A290;height:24px}
+.pin{width:0;height:0}
+.pb{
+  left:0;top:0;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:#fff;
+  background:var(--indigo);border:2px solid #fff;
+  box-shadow:0 2px 6px rgba(10,14,20,.35);
+  transition:transform .55s cubic-bezier(.3,.7,.3,1), width .2s, height .2s;
+}
+.pin.red .pb{background:var(--crimson)}
+.pin.grey .pb{background:var(--ink-2)}
+.pin.act .pb{width:34px;height:34px;margin:-17px 0 0 -17px;font-size:16px;
+  box-shadow:0 0 0 4px rgba(18,58,142,.25),0 3px 8px rgba(10,14,20,.4)}
+.pin.red.act .pb{box-shadow:0 0 0 4px rgba(161,18,32,.25),0 3px 8px rgba(10,14,20,.4)}
+.stage .cap3d{position:absolute;left:0;right:0;bottom:6px;text-align:center;
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+
+/* stepper */
+.step{
+  display:flex;align-items:stretch;border:2px solid var(--ink);border-top:0;
+  border-radius:0 0 4px 4px;margin:0 0 13px;overflow:hidden;background:var(--paper)
+}
+.step .nav3d{
+  flex:0 0 58px;border:0;background:var(--indigo);color:#fff;font-size:26px;
+  font-family:"Archivo",sans-serif;font-weight:700;cursor:pointer;min-height:74px
+}
+.step .nav3d:active{filter:brightness(.9)}
+.step .nav3d:focus-visible{outline:3px solid var(--crimson);outline-offset:-3px}
+.stopcard{
+  flex:1;display:flex;align-items:center;gap:11px;background:var(--paper);border:0;
+  border-left:2px solid var(--ink);border-right:2px solid var(--ink);
+  padding:10px 12px;text-align:left;cursor:pointer;font-family:inherit;min-width:0
+}
+.stopcard:active{background:var(--tint)}
+.stopcard:focus-visible{outline:3px solid var(--indigo);outline-offset:-3px}
+.stopcard .sn{flex:0 0 30px;height:30px;border-radius:50%;background:var(--indigo);color:#fff;
+  font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;
+  display:flex;align-items:center;justify-content:center}
+.stopcard .sn.red{background:var(--crimson)}
+.stopcard .sn.grey{background:var(--ink-2)}
+.stopcard .st{flex:1;min-width:0}
+.stopcard .st b{display:block;font-family:"Archivo",sans-serif;font-size:17px;font-weight:700;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stopcard .st span{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.22}
+.stopcard .go{flex:0 0 auto;color:var(--indigo);font-size:22px;font-weight:700}
+
+/* ---- sa'y figure + list ---- */
+.figure{border:2px solid var(--ink);border-radius:4px;padding:8px 6px 2px;margin:0 0 13px;background:var(--paper)}
+.figure svg{display:block;width:100%;height:auto}
+.cap{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-2);text-align:center;padding:4px 0 6px}
+.poi{border:2px solid var(--ink);border-radius:4px;overflow:hidden;margin:0 0 13px}
+.poi button{display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  background:var(--paper);border:0;border-bottom:1px solid var(--tint-2);
+  padding:12px 12px;min-height:58px;cursor:pointer;font-family:inherit}
+.poi button:last-child{border-bottom:0}
+.poi button:active{background:var(--tint)}
+.poi button:focus-visible{outline:3px solid var(--indigo);outline-offset:-3px}
+.poi .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--indigo);color:#fff;
+  font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;
+  display:flex;align-items:center;justify-content:center}
+.poi .tx{flex:1;min-width:0}
+.poi .tx b{display:block;font-family:"Archivo",sans-serif;font-size:17px;font-weight:700;color:var(--ink)}
+.poi .tx span{display:block;font-size:14.5px;color:var(--ink-2);line-height:1.25}
+.poi .go{flex:0 0 auto;color:var(--indigo);font-size:22px;font-weight:700}
+
+/* ---- counter ---- */
+.counter{border:2px solid var(--ink);border-radius:4px;margin:0 0 13px;overflow:hidden}
+.c-top{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.c-num{font-family:"IBM Plex Mono",monospace;font-size:38px;font-weight:600;line-height:1;color:var(--indigo)}
+.c-num small{font-size:15px;color:var(--ink-2)}
+.c-txt{flex:1;font-size:16px;line-height:1.28}
+.c-txt b{display:block;font-family:"Archivo",sans-serif;font-size:17px;font-weight:700}
+.c-txt span{color:var(--ink-2);font-size:15px}
+.pips{display:flex;gap:3px;padding:0 14px 12px}
+.pip{flex:1;height:9px;background:var(--tint-2);border-radius:1px}
+.pip.ramal{background:#CFE3D9}
+.pip.done{background:var(--indigo)}
+.pip.ramal.done{background:var(--jade)}
+.c-btns{display:flex;border-top:2px solid var(--ink)}
+.c-btns button{flex:1;border:0;background:var(--indigo);color:#fff;font-family:"Archivo",sans-serif;
+  font-size:15px;font-weight:700;padding:16px 8px;min-height:54px;cursor:pointer}
+.c-btns button.ghost{flex:0 0 34%;background:var(--paper);color:var(--ink-2);border-left:2px solid var(--ink)}
+.c-btns button:active{filter:brightness(.92)}
+.legend{display:flex;gap:14px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  font-weight:600;color:var(--ink-2);margin:-4px 0 13px;padding:0 2px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:1px;margin-right:5px;vertical-align:-1px}
+
+/* ---- popup ---- */
+.scrim{position:fixed;inset:0;background:rgba(10,14,20,.45);opacity:0;pointer-events:none;
+  transition:opacity .18s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.pop{
+  position:fixed;left:50%;top:max(14px,env(safe-area-inset-top));width:min(440px,calc(100vw - 24px));
+  transform:translate(-50%,-14px) scale(.96);opacity:0;pointer-events:none;
+  transition:transform .22s cubic-bezier(.2,.9,.3,1),opacity .18s;
+  z-index:50;background:var(--paper);border:3px solid var(--ink);border-radius:6px;
+  max-height:calc(100vh - 28px);overflow-y:auto;-webkit-overflow-scrolling:touch;
+  box-shadow:0 18px 40px -12px rgba(10,14,20,.5)
+}
+.pop.on{transform:translate(-50%,0) scale(1);opacity:1;pointer-events:auto}
+.pop-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+  padding:12px 14px;border-bottom:2px solid var(--ink);background:var(--tint)}
+.pop-hd .ar{font-family:"Amiri",serif;font-weight:700;font-size:30px;line-height:1.4;direction:rtl}
+.pop-hd .rom{font-family:"Archivo",sans-serif;font-size:19px;font-weight:800;letter-spacing:-.01em}
+.x{border:2px solid var(--ink);background:var(--paper);border-radius:3px;width:38px;height:38px;
+  flex:0 0 38px;font-size:19px;line-height:1;cursor:pointer;font-family:"Archivo",sans-serif}
+.pop-bd{padding:13px 14px 16px}
+.pop-bd h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--indigo);margin:13px 0 4px}
+.pop-bd h4:first-child{margin-top:0}
+.pop-bd h4.r{color:var(--crimson)}
+.pop-bd p{font-size:17px;margin:0}
+.pop-bd .ar2{font-family:"Amiri",serif;font-weight:700;font-size:24px;line-height:1.9;direction:rtl;text-align:right;margin:2px 0 6px}
+.pop-bd .tl{font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.5;color:var(--ink-2);margin:0 0 6px}
+.pop-bd h4.g{color:var(--jade)}
+.du{margin:0 0 14px}
+.du:last-child{margin-bottom:0}
+.du .dh{font-family:"Archivo",sans-serif;font-size:13px;font-weight:700;color:var(--ink-2);margin:0 0 3px}
+.du .dm{font-size:15.5px;margin:0}
+.dn{font-size:14.5px;font-style:italic;color:var(--ink-2);margin:10px 0 0;border-top:1px solid var(--tint-2);padding-top:8px}
+
+/* ---- nav ---- */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;background:var(--paper);
+  border-top:3px solid var(--ink);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;background:none;border:0;color:var(--ink-2);font-size:11px;font-weight:700;
+  letter-spacing:.02em;padding:9px 2px 10px;cursor:pointer;min-height:58px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  border-right:1px solid var(--tint-2)}
+nav button:last-child{border-right:0}
+nav button .n{font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600}
+nav button[aria-current="true"]{background:var(--indigo);color:#fff}
+nav button:focus-visible{outline:3px solid var(--crimson);outline-offset:-3px}
+.c-btns .sm{flex:0 0 84px;font-size:13px}
+.doubt{width:100%;border:0;border-top:2px solid var(--ink);background:#FFF8E6;color:var(--amber);
+  font-family:"Archivo",sans-serif;font-size:13.5px;font-weight:700;padding:13px 10px;min-height:48px;cursor:pointer}
+.doubt:active{background:#FDEFC8}
+.words{border:2px solid var(--ink);border-radius:4px;padding:13px 14px;margin:0 0 13px;background:var(--paper)}
+.words h3{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px}
+.words .ar3{font-family:"Amiri",serif;font-weight:700;font-size:25px;line-height:1.9;direction:rtl;text-align:right;margin:0 0 5px}
+.words .tl3{font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.5;color:var(--ink-2);margin:0 0 5px}
+.words .mn3{font-size:15.5px;color:var(--ink-2);margin:0 0 14px}
+.words .mn3:last-child{margin-bottom:0}
+.ok{border:2px solid var(--jade);border-radius:4px;padding:11px 13px;margin:0 0 13px;background:#F2FAF6}
+.ok b{color:var(--jade);font-family:"Archivo",sans-serif;font-size:13px;
+  text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px}
+.wake{border:2px solid var(--ink);border-radius:3px;background:var(--paper);color:var(--ink-2);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.06em;
+  padding:9px 11px;min-height:40px;cursor:pointer}
+.wake.on{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.hdrow{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Shafi'i madhhab</p>
+  <div class="hdrow">
+    <h1>Umrah — field guide</h1>
+    <button class="wake" id="wake" hidden>Screen: auto</button>
+  </div>
+</header>
+
+<main>
+
+<!-- 1 IHRAM -->
+<section class="panel on" id="p1">
+  <div class="head"><span class="num">01</span><h2>Ihram</h2></div>
+
+  <div class="block">
+    <h3>At the miqat <span class="tag t-rukn">Pillar</span></h3>
+    <p>Intend umrah in your heart. That intention <em>is</em> <button class="term" data-t="ihram">ihram</button>. The cloth is not.</p>
+  </div>
+
+  <div class="flag"><b>Key point</b><button class="term" data-t="talbiyah">Talbiyah</button> is sunnah, not a condition. Intention alone makes you muhrim — begin the talbiyah after it and recite it often until tawaf.</div>
+
+  <div class="block fill">
+    <h3>Before intending <span class="tag t-sunnah">Sunnah</span></h3>
+    <ul>
+      <li><button class="term" data-t="ghusl">Ghusl</button>. Trim nails, remove unwanted hair.</li>
+      <li>Perfume the body, not the cloth.</li>
+      <li>Two rak'ahs, if not a disliked time.</li>
+      <li>Men: <button class="term" data-t="izar">izar</button> and <button class="term" data-t="rida">rida</button>, unstitched.</li>
+      <li>Women: modest clothing, face and hands bare, <b>feet covered</b>.</li>
+    </ul>
+  </div>
+
+  <div class="words">
+    <h3>The words</h3>
+    <p class="ar3">نَوَيْتُ الْعُمْرَةَ وَأَحْرَمْتُ بِهَا لِلَّهِ تَعَالَى</p>
+    <p class="tl3">Nawaytul-'umrata wa ahramtu biha lillahi ta'ala</p>
+    <p class="mn3">I intend umrah and have entered ihram for it, for Allah Most High. The intention in the heart is what counts — any language, no words needed. Saying it helps.</p>
+    <p class="ar3">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</p>
+    <p class="tl3">Labbayk Allahumma labbayk. Labbayka la sharika laka labbayk. Innal-hamda wan-ni'mata laka wal-mulk. La sharika lak.</p>
+    <p class="mn3">Here I am, O Allah, here I am. Here I am — You have no partner — here I am. All praise, favour and dominion are Yours. You have no partner.</p>
+  </div>
+
+  <div class="block">
+    <h3>Now forbidden</h3>
+    <ul>
+      <li>Cutting hair or nails. Perfume. Hunting.</li>
+      <li>Intercourse, its preliminaries, contracting marriage.</li>
+      <li>Men: stitched clothes, and covering the <b>head</b>. The face may be covered.</li>
+    </ul>
+  </div>
+
+  <div class="block fill">
+    <h3>From the miqat to Makkah</h3>
+    <ul>
+      <li><b>Flying in:</b> the miqat passes beneath the plane — be in ihram before it. Intend at the airport or when the crew announce the boundary (roughly 15–20 minutes before landing in Jeddah). Crossing it without ihram obliges a <button class="term" data-t="dam">dam</button>, unless you go back out to the miqat and re-enter.</li>
+      <li><b>On the road:</b> keep the talbiyah going — rising, descending, meeting other pilgrims, after prayers. Men aloud, women quietly.</li>
+      <li>Sleep, eat, shower (unscented soap), and use the seatbelt, glasses, ring and money belt freely — none of this touches ihram. Men: mind the blanket over the head, and no fitted footwear covering the ankle bone.</li>
+      <li>Ghusl before entering Makkah is sunnah if you can manage it.</li>
+      <li>Enter the Masjid with the right foot: <em>Allahummaghfir li dhunubi waftah li abwaba rahmatik</em> — O Allah, forgive my sins and open for me the doors of Your mercy.</li>
+    </ul>
+  </div>
+
+  <div class="words">
+    <h3>On first seeing the Kaaba</h3>
+    <p class="mn3">Du'a at the first sight is held to be answered — decide beforehand what you will ask for, raise your hands, and ask for it in your own words first. Then:</p>
+    <p class="ar3">اللَّهُمَّ زِدْ هَذَا الْبَيْتَ تَشْرِيفًا وَتَعْظِيمًا وَتَكْرِيمًا وَمَهَابَةً، وَزِدْ مَنْ شَرَّفَهُ وَكَرَّمَهُ مِمَّنْ حَجَّهُ أَوِ اعْتَمَرَهُ تَشْرِيفًا وَتَكْرِيمًا وَتَعْظِيمًا وَبِرًّا</p>
+    <p class="tl3">Allahumma zid hadhal-bayta tashrifan wa ta'ziman wa takriman wa mahabah, wa zid man sharrafahu wa karramahu mimman hajjahu awi'tamarahu tashrifan wa takriman wa ta'ziman wa birra</p>
+    <p class="mn3">O Allah, increase this House in honour, reverence, nobility and awe — and increase those who honour and revere it, of those who come to it in hajj or umrah, in honour, nobility, reverence and righteousness.</p>
+  </div>
+</section>
+
+<!-- 2 TAWAF -->
+<section class="panel" id="p2">
+  <div class="head"><span class="num">02</span><h2>Tawaf</h2></div>
+
+  <div class="counter">
+    <div class="c-top">
+      <div class="c-num" id="tn">0<small>/7</small></div>
+      <div class="c-txt"><b id="ts">At the Black Stone</b><span id="th">Do istilam and begin.</span></div>
+    </div>
+    <div class="pips" id="tp"></div>
+    <div class="c-btns"><button id="ta">Count circuit</button><button class="ghost sm" id="tu">− 1</button><button class="ghost sm" id="tr">Hold to reset</button></div>
+    <button class="doubt" id="td">Unsure? Build on the lower count</button>
+  </div>
+  <div class="legend"><span><i style="background:var(--jade)"></i>Ramal 1–3</span><span><i style="background:var(--indigo)"></i>Normal 4–7</span></div>
+
+  <div class="stage" id="stage">
+    <div class="world" id="world"></div>
+    <p class="cap3d">Drag to rotate · arrows step through the points</p>
+  </div>
+  <div class="step">
+    <button class="nav3d" id="prev3d" aria-label="Previous point">‹</button>
+    <button class="stopcard" id="stopcard" aria-label="Open details for this point">
+      <span class="sn" id="scN">1</span>
+      <span class="st"><b id="scB">Black Stone</b><span id="scS"></span></span>
+      <span class="go">›</span>
+    </button>
+    <button class="nav3d" id="next3d" aria-label="Next point">›</button>
+  </div>
+
+  <div class="block">
+    <h3>Must hold throughout <span class="tag t-cond">Condition</span></h3>
+    <ul>
+      <li>Wudu, and clean body and clothes.</li>
+      <li>Awrah covered.</li>
+    </ul>
+  </div>
+
+  <div class="flag"><b>If wudu breaks</b>Renew it and resume from where you stopped — any circuit. Never restart. No <button class="term" data-t="dam">dam</button>.<br><br>Incidental contact in the crowd does not break wudu on the position we follow.</div>
+
+  <div class="block fill">
+    <h3>The shape of it</h3>
+    <ul>
+      <li>Seven <button class="term" data-t="shawt">shawt</button>. Start and end at the Black Stone, Kaaba on your left.</li>
+      <li>Stay <b>outside</b> the Hijr. Cut through and that circuit is void.</li>
+      <li><button class="term" data-t="idtiba">Idtiba'</button> — all seven, men only.</li>
+      <li><button class="term" data-t="ramal">Ramal</button> — first three only. Drop it if crowded; nothing owed.</li>
+      <li><button class="term" data-t="istilam">Istilam</button> at the start of each circuit if you can reach.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h3>Then two rak'ahs <span class="tag t-sunnah">Sunnah</span></h3>
+    <p>Cover the right shoulder first. Pray behind the <button class="term" data-t="maqam">Maqam</button>, or anywhere in the Haram if crowded. Uncover again for sa'y.</p>
+  </div>
+</section>
+
+<!-- 3 SA'Y -->
+<section class="panel" id="p3">
+  <div class="head"><span class="num">03</span><h2>Sa'y</h2></div>
+
+  <div class="counter">
+    <div class="c-top">
+      <div class="c-num" id="sn">0<small>/7</small></div>
+      <div class="c-txt"><b id="ss">At Safa</b><span id="sh2">Lap 7 ends at Marwah.</span></div>
+    </div>
+    <div class="pips" id="sp"></div>
+    <div class="c-btns"><button id="sa">Count crossing</button><button class="ghost sm" id="su">− 1</button><button class="ghost sm" id="sr">Hold to reset</button></div>
+    <button class="doubt" id="sd">Unsure? Build on the lower count</button>
+  </div>
+
+  <div class="figure">
+    <svg viewBox="0 0 340 132" role="img" aria-label="Plan of the masa between Safa and Marwah with the two green markers.">
+      <line x1="52" y1="66" x2="288" y2="66" stroke="#E2E8F0" stroke-width="30"/>
+      <line x1="138" y1="66" x2="198" y2="66" stroke="#0B6B4A" stroke-width="30" opacity=".22"/>
+      <rect x="135" y="48" width="5" height="36" fill="#0B6B4A"/>
+      <rect x="196" y="48" width="5" height="36" fill="#0B6B4A"/>
+      <text x="122" y="104" class="mono" font-size="10" font-weight="600" fill="#0B6B4A" letter-spacing="1">GREEN MARKERS</text>
+      <circle cx="52" cy="66" r="15" fill="#0B6B4A"/>
+      <text x="52" y="71" class="mono" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">A</text>
+      <circle cx="288" cy="66" r="15" fill="#0B6B4A"/>
+      <text x="288" y="71" class="mono" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">B</text>
+      <text x="34" y="32" class="mono" font-size="11" font-weight="600" fill="#0A0E14">SAFA</text>
+      <text x="262" y="32" class="mono" font-size="11" font-weight="600" fill="#0A0E14">MARWAH</text>
+      <text x="30" y="104" class="mono" font-size="10" fill="#3C4654">START</text>
+      <text x="256" y="104" class="mono" font-size="10" fill="#3C4654">END</text>
+    </svg>
+    <p class="cap">One crossing = one lap · seven in total</p>
+  </div>
+
+  <div class="poi">
+    <button data-t="safa"><span class="n" style="background:#0B6B4A">A</span><span class="tx"><b>Safa</b><span>Every sa'y begins here</span></span><span class="go">›</span></button>
+    <button data-t="marwah"><span class="n" style="background:#0B6B4A">B</span><span class="tx"><b>Marwah</b><span>Lap seven ends here</span></span><span class="go">›</span></button>
+  </div>
+
+
+
+  <div class="block">
+    <h3>Rules <span class="tag t-rukn">Pillar</span></h3>
+    <ul>
+      <li>Start at Safa, end at Marwah. Safa→Marwah is one lap.</li>
+      <li>Must follow a valid tawaf.</li>
+      <li><b>Wudu not required</b> — only recommended.</li>
+      <li>Men walk briskly between the green markers. Idtiba' continues.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4 HALQ -->
+<section class="panel" id="p4">
+  <div class="head"><span class="num">04</span><h2>Halq</h2></div>
+
+  <div class="block">
+    <h3>Cutting the hair <span class="tag t-rukn">Pillar</span></h3>
+    <ul>
+      <li><b>Three hairs is the minimum.</b></li>
+      <li>Shaving is superior for men.</li>
+      <li>Women take a fingertip's length from the ends.</li>
+    </ul>
+  </div>
+
+  <div class="flag"><b>Key point</b>This is a <em>pillar</em> — no <button class="term" data-t="dam">dam</button> can stand in its place. You are not out of ihram until the hair is cut.</div>
+
+  <div class="block fill">
+    <h3>Order is itself a pillar</h3>
+    <p><button class="term" data-t="tartib">Tartib</button>: ihram → tawaf → sa'y → halq. Ihram is now fully lifted.</p>
+    <p>No farewell tawaf is required for umrah in this school.</p>
+  </div>
+</section>
+</main>
+
+<nav aria-label="Sections">
+  <button data-p="p1" aria-current="true"><span class="n">01</span>Ihram</button>
+  <button data-p="p2"><span class="n">02</span>Tawaf</button>
+  <button data-p="p3"><span class="n">03</span>Sa'y</button>
+  <button data-p="p4"><span class="n">04</span>Halq</button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pRom" tabindex="-1">
+  <div class="pop-hd">
+    <div><div class="ar" id="pAr"></div><div class="rom" id="pRom"></div></div>
+    <button class="x" id="pX" aria-label="Close">✕</button>
+  </div>
+  <div class="pop-bd">
+    <h4>Meaning</h4><p id="pLit"></p>
+    <h4>In practice</h4><p id="pUse"></p>
+    <div id="pDuaW">
+      <h4 class="g">Du'a here <span style="text-transform:none;letter-spacing:0">· recommended</span></h4>
+      <div id="pDuaList"></div>
+    </div>
+    <h4 class="r">Shafi'i ruling</h4><p id="pRule"></p>
+  </div>
+</div>
+
+<script>
+/* ================= glossary ================= */
+const G={
+ ihram:{a:"إِحْرَام",r:"Ihram",l:"Making a thing forbidden to oneself.",u:"The consecrated state in which ordinarily lawful things become unlawful until the rites are done. The two white cloths a man wears are also called his ihram in everyday speech — but that is the dress, not the state.",x:"The pillar is the intention. Put on the cloths and you are not yet muhrim; intend without them and you already are."},
+ talbiyah:{a:"تَلْبِيَة",r:"Talbiyah",l:"Answering a call — 'here I am'.",u:"Labbayk Allahumma labbayk — the pilgrim's response, recited often from ihram until tawaf begins.",x:"Sunnah, not a condition. Recite it aloud (men) and often: rising, descending, after prayers, meeting others. Stop when you reach the Black Stone.",d:[{a:"لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ",t:"Labbayk Allahumma labbayk. Labbayka la sharika laka labbayk. Innal-hamda wan-ni'mata laka wal-mulk. La sharika lak.",m:"Here I am, O Allah, here I am. Here I am — You have no partner — here I am. All praise, favour and dominion are Yours. You have no partner."}]},
+ ghusl:{a:"غُسْل",r:"Ghusl",l:"A full washing of the body.",u:"The complete bath taken before entering ihram.",x:"Sunnah, not required — and still recommended for a woman in menstruation or post-natal bleeding, who enters ihram and does everything but tawaf."},
+ izar:{a:"إِزَار",r:"Izar",l:"A wrap.",u:"The lower cloth, waist to below the knee.",x:"Men only, unstitched. A belt to hold it is fine."},
+ rida:{a:"رِدَاء",r:"Rida'",l:"A mantle.",u:"The upper cloth — the one repositioned for idtiba'.",x:"Men only, unstitched."},
+ shawt:{a:"شَوْط",r:"Shawt",l:"A single run or stretch.",u:"One circuit. Seven make one tawaf.",x:"Unsure if you did six or seven? Build on the lesser and do another."},
+ idtiba:{a:"اِضْطِبَاع",r:"Idtiba'",l:"Placing under the armpit.",u:"Pass the middle of the rida' under the right armpit; both ends fall on the left shoulder, baring the right.",x:"Sunnah for men — all seven circuits and through sa'y. Cover up for the two rak'ahs."},
+ ramal:{a:"رَمَل",r:"Ramal",l:"A quick, short-stepped gait.",u:"Brisk walking with the shoulders moving — nearer a hurried stride than a jog.",x:"Men, first three circuits only. Dropped without penalty if the crowd prevents it."},
+ istilam:{a:"اِسْتِلَام",r:"Istilam",l:"To greet by touching.",u:"Touch or kiss the Black Stone; otherwise point the palms toward it and say Bismillah, Allahu akbar.",x:"Sunnah. Never push for it — harming others to reach a sunnah inverts the priority."},
+ hajar:{a:"الحَجَر الأَسْوَد",r:"Al-Hajar al-Aswad",l:"The Black Stone.",u:"Set in the eastern corner. Every circuit begins and ends level with it.",x:"Touching is sunnah; passing it is what counts.",d:[{h:"At each istilam",a:"بِسْمِ اللهِ وَاللهُ أَكْبَرُ",t:"Bismillahi wallahu akbar",m:"In the name of Allah; Allah is the greatest."},{h:"On the first circuit you may add",a:"اللَّهُمَّ إِيمَانًا بِكَ وَتَصْدِيقًا بِكِتَابِكَ وَوَفَاءً بِعَهْدِكَ وَاتِّبَاعًا لِسُنَّةِ نَبِيِّكَ ﷺ",t:"Allahumma imanan bika wa tasdiqan bi-kitabika wa wafa'an bi-'ahdika wattiba'an li-sunnati nabiyyika ﷺ",m:"O Allah — out of faith in You, belief in Your Book, loyalty to Your covenant, and following the way of Your Prophet ﷺ."}]},
+ yamani:{a:"الرُّكْن اليَمَانِي",r:"Rukn Yamani",l:"The Yemeni corner.",u:"The corner immediately before the Black Stone on each circuit.",x:"Touch with the hand if you can. Do not kiss it, and do not point if you cannot reach.",d:[{h:"At the corner",a:"اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ",t:"Allahumma inni as'alukal-'afwa wal-'afiyata fid-dini wad-dunya wal-akhirah",m:"O Allah, I ask You for pardon and wellbeing — in religion, in this world, and in the next."},{h:"From here to the Black Stone — the one tawaf du'a established from the Prophet ﷺ himself",a:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",t:"Rabbana atina fid-dunya hasanah, wa fil-akhirati hasanah, wa qina 'adhaban-nar",m:"Our Lord, give us good in this world and good in the next, and shield us from the punishment of the Fire."}]},
+ iraqi:{a:"الرُّكْن العِرَاقِي",r:"Rukn Iraqi",l:"The Iraqi corner.",u:"The first corner after leaving the Black Stone.",x:"No touching prescribed.",d:[{a:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الشَّكِّ وَالشِّرْكِ وَالشِّقَاقِ وَالنِّفَاقِ وَسُوءِ الأَخْلَاقِ",t:"Allahumma inni a'udhu bika minash-shakki wash-shirki wash-shiqaqi wan-nifaqi wa su'il-akhlaq",m:"O Allah, I take refuge in You from doubt, from associating partners with You, from discord, hypocrisy, and bad character."}]},
+ shami:{a:"الرُّكْن الشَّامِي",r:"Rukn Shami",l:"The Syrian corner.",u:"The far corner, beyond the Hijr.",x:"No touching prescribed.",d:[{a:"اللَّهُمَّ اجْعَلْهَا عُمْرَةً مَبْرُورَةً وَسَعْيًا مَشْكُورًا وَذَنْبًا مَغْفُورًا",t:"Allahummaj'alha 'umratan mabrurah, wa sa'yan mashkura, wa dhanban maghfura",m:"O Allah, make it an accepted umrah, an effort that is rewarded, and sins that are forgiven."}]},
+ hijr:{a:"حِجْر إِسْمَاعِيل",r:"Hijr Isma'il",l:"The enclosure of Isma'il.",u:"The low semicircular wall. This ground is part of the Kaaba, left out when the Quraysh rebuilt it short of funds. The gold Mizab (rain-spout) on the roof pours over it.",x:"Circle outside it. Cut through and the circuit is void.",d:[{h:"Passing beneath the Mizab",a:"اللَّهُمَّ أَظِلَّنِي تَحْتَ ظِلِّ عَرْشِكَ يَوْمَ لَا ظِلَّ إِلَّا ظِلُّكَ",t:"Allahumma azillani tahta zilli 'arshika yawma la zilla illa zilluk",m:"O Allah, shade me beneath the shade of Your Throne on the day when there is no shade but Yours."}]},
+ maqam:{a:"مَقَام إِبْرَاهِيم",r:"Maqam Ibrahim",l:"The standing-place of Ibrahim.",u:"The stone bearing his footprints, where he stood raising the walls.",x:"Pray the two rak'ahs behind it, or anywhere in the Haram if crowded.",d:[{h:"Approaching, recite the verse (2:125)",a:"وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى",t:"Wattakhidhu min maqami Ibrahima musalla",m:"Take the standing-place of Ibrahim as a place of prayer."}],dn:"In the two rak'ahs: Surah al-Kafirun in the first, Surah al-Ikhlas in the second."},
+ multazam:{a:"المُلْتَزَم",r:"Al-Multazam",l:"The place of clinging.",u:"The wall between the Black Stone and the door, where du'a is answered. There is no fixed wording — cling to the wall if you can reach it and ask for your own needs in your own language.",x:"Recommended after tawaf. In ihram, avoid the kiswah — it is perfumed."},
+ zamzam:{a:"زَمْزَم",r:"Zamzam",l:"Abundant water.",u:"The well east of the Kaaba. Drink facing the Kaaba, and intend something.",x:"Recommended after the two rak'ahs. Zamzam is for whatever it is drunk for — so drink with an intention.",d:[{a:"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا وَاسِعًا وَشِفَاءً مِنْ كُلِّ دَاءٍ",t:"Allahumma inni as'aluka 'ilman nafi'a, wa rizqan wasi'a, wa shifa'an min kulli da'",m:"O Allah, I ask You for beneficial knowledge, ample provision, and cure from every illness."}]},
+ safa:{a:"الصَّفَا",r:"Safa",l:"Smooth rock.",u:"The southern hillock. Every sa'y starts here.",x:"Face the Kaaba, raise the hands, takbir and du'a — sunnah at both ends.",d:[{h:"Approaching, recite the verse (2:158)",a:"إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللهِ",t:"Innas-Safa wal-Marwata min sha'a'irillah",m:"Safa and Marwah are among the signs of Allah."},{h:"On the hill, facing the Kaaba, hands raised, after three takbirs",a:"لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ",t:"La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir. La ilaha illallahu wahdah, anjaza wa'dah, wa nasara 'abdah, wa hazamal-ahzaba wahdah",m:"None is worthy of worship but Allah alone, without partner; His is the dominion and His is the praise, and He has power over all things. None is worthy of worship but Allah alone: He fulfilled His promise, gave His servant victory, and alone defeated the confederates."}]},
+ marwah:{a:"المَرْوَة",r:"Marwah",l:"A soft white stone.",u:"The northern hillock. Lap seven ends here. On the hill, face the Kaaba and repeat the same takbir and du'a as at Safa.",x:"If you finish at Safa you have miscounted.",d:[{h:"Between the green markers",a:"رَبِّ اغْفِرْ وَارْحَمْ إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ",t:"Rabbighfir warham, innaka antal-a'azzul-akram",m:"My Lord, forgive and have mercy — You are the Mightiest, the Most Generous."}],dn:"Elsewhere between the hills there is no fixed wording — dhikr, Qur'an, or your own asking."},
+ dam:{a:"دَم",r:"Dam",l:"Blood.",u:"A sacrificial expiation for certain omissions.",x:"It can cover a missed sunnah or wajib — never a missed pillar."},
+ tartib:{a:"تَرْتِيب",r:"Tartib",l:"Putting in order.",u:"Performing the rites in sequence.",x:"A pillar in its own right: ihram, tawaf, sa'y, halq."}
+};
+
+/* ================= popup ================= */
+const pop=document.getElementById('pop'),scrim=document.getElementById('scrim');
+let last=null;
+const put=(id,v)=>document.getElementById(id).textContent=v;
+function openT(k){const e=G[k];if(!e)return;last=document.activeElement;
+  put('pAr',e.a);put('pRom',e.r);put('pLit',e.l);put('pUse',e.u);put('pRule',e.x);
+  const w=document.getElementById('pDuaW'),dl=document.getElementById('pDuaList');
+  if(e.d&&e.d.length){w.style.display='block';dl.textContent='';
+    e.d.forEach(u=>{
+      const box=document.createElement('div');box.className='du';
+      if(u.h){const h=document.createElement('p');h.className='dh';h.textContent=u.h;box.appendChild(h)}
+      const a=document.createElement('p');a.className='ar2';a.textContent=u.a;box.appendChild(a);
+      const t=document.createElement('p');t.className='tl';t.textContent=u.t;box.appendChild(t);
+      const m=document.createElement('p');m.className='dm';m.textContent=u.m;box.appendChild(m);
+      dl.appendChild(box);
+    });
+    if(e.dn){const nb=document.createElement('p');nb.className='dn';nb.textContent=e.dn;dl.appendChild(nb)}
+  }else w.style.display='none';
+  pop.classList.add('on');scrim.classList.add('on');pop.focus();}
+function closeT(){pop.classList.remove('on');scrim.classList.remove('on');if(last)last.focus();}
+scrim.onclick=closeT;document.getElementById('pX').onclick=closeT;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeT()});
+document.addEventListener('click',e=>{const t=e.target.closest('[data-t]');if(t)openT(t.dataset.t)});
+
+/* ================= 3D reconstruction ================= */
+const world=document.getElementById('world');
+const KW=112, KD=92, KH=142;          /* kaaba width/depth/height */
+function el(cls,style){const d=document.createElement('div');d.className=cls;
+  for(const k in style)d.style[k]=style[k];world.appendChild(d);return d}
+
+/* floor */
+el('floor',{});el('floor2',{});
+
+/* kaaba faces — front(+Z) holds door & multazam side */
+function face(w,h,tf){
+  const d=el('face',{width:w+'px',height:h+'px',left:(-w/2)+'px',top:(-KH)+'px',transform:tf});
+  const hz=document.createElement('div');hz.className='hizam';d.appendChild(hz);
+  const sc=document.createElement('div');sc.className='script';d.appendChild(sc);
+  return d;
+}
+const fFront=face(KW,KH,'translateZ('+(KD/2)+'px)');
+face(KW,KH,'rotateY(180deg) translateZ('+(KD/2)+'px)');
+face(KD,KH,'rotateY(90deg) translateZ('+(KW/2)+'px)');
+face(KD,KH,'rotateY(-90deg) translateZ('+(KW/2)+'px)');
+/* roof */
+el('face',{width:KW+'px',height:KD+'px',left:(-KW/2)+'px',top:(-KD/2)+'px',
+  transform:'translateY('+(-KH)+'px) rotateX(90deg)',background:'#1A2130'});
+/* door on front face, toward Black Stone (right) side, raised */
+const door=document.createElement('div');door.className='door';
+door.style.cssText='position:absolute;left:14%;bottom:26%';
+fFront.appendChild(door);
+/* black stone: silver frame low on the LEFT edge of the front face */
+const bs=document.createElement('div');
+bs.style.cssText='position:absolute;left:-2%;bottom:9%;width:13px;height:13px;border-radius:50%;'+
+ 'background:radial-gradient(circle at 38% 35%,#F2F4F6,#9AA4AE 62%,#6E7883);border:1px solid #59626C';
+fFront.appendChild(bs);
+
+/* shadharwan: sloped marble skirting around the base */
+[['translateZ('+(KD/2+4)+'px)',KW+16],
+ ['rotateY(180deg) translateZ('+(KD/2+4)+'px)',KW+16],
+ ['rotateY(90deg) translateZ('+(KW/2+4)+'px)',KD+16],
+ ['rotateY(-90deg) translateZ('+(KW/2+4)+'px)',KD+16]].forEach(([tf,w])=>{
+  el('',{width:w+'px',height:'12px',left:(-w/2)+'px',top:'-12px',
+    transform:tf+' rotateX(14deg)',
+    background:'linear-gradient(180deg,#EFEDE4,#CFCBBC)',border:'1px solid #B4AF9E'});
+});
+
+/* mizab al-rahmah: golden spout over the hijr (right side) */
+el('',{width:'34px',height:'9px',left:'-17px',top:'-4.5px',
+  transform:'translate3d('+(KW/2+17)+'px,'+(-KH+4)+'px,0) rotateX(90deg)',
+  background:'linear-gradient(90deg,#E4B41F,#A87E0C)',border:'1px solid #6E5306'});
+
+/* maqam ibrahim: gold-and-glass kiosk in front of the door */
+const MQ={x:-52,z:128,r:13,h:30};
+for(let i=0;i<8;i++){
+  const ang=i*45;
+  const w=2*MQ.r*Math.tan(Math.PI/8)+1;
+  el('',{width:w+'px',height:MQ.h+'px',left:(-w/2)+'px',top:(-MQ.h)+'px',
+    transform:'translate3d('+MQ.x+'px,0,'+MQ.z+'px) rotateY('+ang+'deg) translateZ('+MQ.r+'px)',
+    background:'linear-gradient(180deg,rgba(216,228,238,.9) 0%,rgba(216,228,238,.9) 55%,#C9A227 55%,#8F6E0B 100%)',
+    border:'1px solid #8F6E0B'});
+}
+el('',{width:(MQ.r*2+2)+'px',height:(MQ.r*2+2)+'px',left:(-MQ.r-1)+'px',top:(-MQ.r-1)+'px',
+  borderRadius:'50%',transform:'translate3d('+MQ.x+'px,'+(-MQ.h)+'px,'+MQ.z+'px) rotateX(90deg)',
+  background:'radial-gradient(circle,#E9BE2E,#A87E0C)',border:'1px solid #6E5306'});
+
+/* hijr wall — semicircle off the RIGHT wall (x=+KW/2) */
+const HR=52, SEG=11;
+for(let i=0;i<SEG;i++){
+  const a=(i+0.5)/SEG*Math.PI;
+  const x=KW/2 + HR*Math.sin(a);
+  const z=(KD/2 - 4)*Math.cos(a);
+  const wSeg=Math.PI*HR/SEG + 2;
+  el('hijrseg',{width:wSeg+'px',left:(-wSeg/2)+'px',top:'-24px',
+    transform:'translate3d('+x+'px,0,'+z+'px) rotateY('+(a*180/Math.PI)+'deg)'});
+}
+
+/* stops: tawaf order 1–5, then after-tawaf 6–8 */
+const STOPS=[
+ {k:'hajar',  n:'1',cls:'red', x:-66,y:-46,z: 56, yaw: 49, s:'Start and end every circuit here'},
+ {k:'iraqi',  n:'2',cls:'',    x: 66,y:-46,z: 56, yaw:-49, s:'First corner after the Stone'},
+ {k:'hijr',   n:'3',cls:'',    x:122,y:-16,z: 0,  yaw:-90, s:'Stay outside the wall'},
+ {k:'shami',  n:'4',cls:'',    x: 66,y:-46,z:-56, yaw:-131,s:'Far corner'},
+ {k:'yamani', n:'5',cls:'',    x:-66,y:-46,z:-56, yaw:-229,s:'Touch if you can — do not kiss'},
+ {k:'multazam',n:'6',cls:'grey',x:-46,y:-58,z: 56, yaw: 38, s:'Between the Stone and the door'},
+ {k:'maqam',  n:'7',cls:'grey',x:-52,y:-44,z:128, yaw: 18, s:'Two rak\u2018ahs behind it'},
+ {k:'zamzam', n:'8',cls:'grey',x:-152,y:-12,z: 62, yaw: 70, s:'Drink after the two rak\u2018ahs'}
+];
+const pins=STOPS.map(st=>{
+  const p=el('pin '+st.cls,{transform:'translate3d('+st.x+'px,'+st.y+'px,'+st.z+'px)'});
+  const b=document.createElement('div');b.className='pb';b.textContent=st.n;p.appendChild(b);
+  return p;
+});
+
+let idx=0, yawCum=STOPS[0].yaw;
+const mod=v=>((v%360)+360)%360;
+/* Badges counter-rotate to face the camera and float 52px toward it,
+   so they can never intersect the model. */
+function applyYaw(){
+  world.style.setProperty('--yaw',yawCum+'deg');
+  const inv='translate(-50%,-50%) rotateY('+(-yawCum)+'deg) rotateX(24deg) translateZ(52px)';
+  pins.forEach(p=>p.querySelector('.pb').style.transform=inv);
+}
+function setStop(n,animate){
+  const prev=yawCum;
+  idx=(n+STOPS.length)%STOPS.length;
+  let d=mod(STOPS[idx].yaw)-mod(prev);
+  if(d>180)d-=360; if(d<-180)d+=360;
+  yawCum=prev+d;
+  world.style.transition=animate===false?'none':'';
+  applyYaw();
+  pins.forEach((p,i)=>p.classList.toggle('act',i===idx));
+  const st=STOPS[idx];
+  const sn=document.getElementById('scN');
+  sn.textContent=st.n; sn.className='sn '+st.cls;
+  document.getElementById('scB').textContent=G[st.k].r;
+  document.getElementById('scS').textContent=st.s;
+  document.getElementById('stopcard').dataset.t=st.k;
+}
+document.getElementById('prev3d').onclick=()=>setStop(idx-1);
+document.getElementById('next3d').onclick=()=>setStop(idx+1);
+setStop(0,false);
+
+/* direct drag-to-rotate; on release, snap to the nearest point */
+const stage=document.getElementById('stage');
+let drag=null;
+stage.addEventListener('pointerdown',e=>{
+  if(e.target.closest('.cap3d'))return;
+  drag={x:e.clientX,yaw:yawCum,moved:false};
+  stage.classList.add('grabbing');
+  world.style.transition='none';
+  stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener('pointermove',e=>{
+  if(!drag)return;
+  const dx=e.clientX-drag.x;
+  if(Math.abs(dx)>3)drag.moved=true;
+  yawCum=drag.yaw + dx*0.42;   /* model follows the finger */
+  applyYaw();
+});
+function endDrag(){
+  if(!drag)return;
+  stage.classList.remove('grabbing');
+  const moved=drag.moved; drag=null;
+  world.style.transition='';
+  if(!moved)return;
+  /* nearest stop by angular distance */
+  let best=0,bd=1e9;
+  STOPS.forEach((st,i)=>{
+    let d=Math.abs(mod(st.yaw)-mod(yawCum)); d=Math.min(d,360-d);
+    if(d<bd){bd=d;best=i}
+  });
+  setStop(best);
+}
+stage.addEventListener('pointerup',endDrag);
+stage.addEventListener('pointercancel',endDrag);
+
+/* ================= section nav ================= */
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById(b.dataset.p).classList.add('on');
+  document.querySelectorAll('nav button').forEach(x=>x.removeAttribute('aria-current'));
+  b.setAttribute('aria-current','true');window.scrollTo(0,0);
+});
+
+/* ================= count persistence =================
+   Works in the downloaded file opened in a browser; fails
+   silently inside the artifact preview. */
+function saveN(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+function loadN(k){try{const v=parseInt(localStorage.getItem(k),10);
+  return (v>=0&&v<=7)?v:0}catch(e){return 0}}
+
+/* press-and-hold helper for reset buttons */
+function holdToFire(btn,ms,fn){
+  let t=null;
+  const arm=e=>{e.preventDefault();t=setTimeout(()=>{t=null;
+    if(navigator.vibrate)navigator.vibrate(30);fn()},ms);btn.style.background='#FBE9E9'};
+  const disarm=()=>{if(t){clearTimeout(t);t=null}btn.style.background=''};
+  btn.addEventListener('pointerdown',arm);
+  btn.addEventListener('pointerup',disarm);
+  btn.addEventListener('pointerleave',disarm);
+  btn.addEventListener('pointercancel',disarm);
+}
+const DOUBT='In doubt, certainty wins: build on the number you are sure of.';
+
+/* ================= tawaf counter ================= */
+let T=loadN('umrah-tawaf');const tp=document.getElementById('tp');
+for(let i=0;i<7;i++){const d=document.createElement('div');d.className='pip'+(i<3?' ramal':'');tp.appendChild(d)}
+function dT(msg){document.getElementById('tn').innerHTML=T+'<small>/7</small>';
+ [...tp.children].forEach((p,i)=>p.classList.toggle('done',i<T));
+ saveN('umrah-tawaf',T);
+ const s=document.getElementById('ts'),h=document.getElementById('th');
+ if(T===0){s.textContent='At the Black Stone';h.textContent='Do istilam and begin.'}
+ else if(T<3){s.textContent='Circuit '+(T+1)+' — brisk';h.textContent='Ramal continues.'}
+ else if(T===3){s.textContent='Circuit 4 — normal pace';h.textContent='Ramal is over. Shoulder stays bare.'}
+ else if(T<7){s.textContent='Circuit '+(T+1)+' — normal pace';h.textContent=(7-T)+' left. Stay outside the Hijr.'}
+ else{s.textContent='Tawaf complete';h.textContent='Cover the shoulder, two rak\u2018ahs at the Maqam.'}
+ if(msg)h.textContent=msg;}
+document.getElementById('ta').onclick=()=>{if(T<7){T++;dT()}};
+document.getElementById('tu').onclick=()=>{if(T>0){T--;dT('Corrected down one.')}};
+document.getElementById('td').onclick=()=>{if(T>0){T--;}dT(DOUBT)};
+holdToFire(document.getElementById('tr'),700,()=>{T=0;dT()});
+dT();
+
+/* ================= sa'y counter ================= */
+let S=loadN('umrah-say');const sp=document.getElementById('sp');
+for(let i=0;i<7;i++){const d=document.createElement('div');d.className='pip';sp.appendChild(d)}
+function dS(msg){document.getElementById('sn').innerHTML=S+'<small>/7</small>';
+ [...sp.children].forEach((p,i)=>p.classList.toggle('done',i<S));
+ saveN('umrah-say',S);
+ const s=document.getElementById('ss'),h=document.getElementById('sh2');
+ if(S===0){s.textContent='At Safa';h.textContent='Lap 7 ends at Marwah.'}
+ else if(S===7){s.textContent='Sa\u2018y complete — at Marwah';h.textContent='Now halq or taqsir.'}
+ else{const at=S%2?'Marwah':'Safa',to=S%2?'Safa':'Marwah';
+  s.textContent='At '+at+' — lap '+(S+1)+' next';h.textContent='Head for '+to+'.'}
+ if(msg)h.textContent=msg;}
+document.getElementById('sa').onclick=()=>{if(S<7){S++;dS()}};
+document.getElementById('su').onclick=()=>{if(S>0){S--;dS('Corrected down one.')}};
+document.getElementById('sd').onclick=()=>{if(S>0){S--;}dS(DOUBT)};
+holdToFire(document.getElementById('sr'),700,()=>{S=0;dS()});
+dS();
+
+/* ================= keep screen awake ================= */
+(function(){
+  if(!('wakeLock' in navigator))return;
+  const b=document.getElementById('wake');b.hidden=false;
+  let lock=null,want=false;
+  function label(){b.textContent=want?'Screen: awake':'Screen: auto';
+    b.classList.toggle('on',want)}
+  async function acquire(){try{lock=await navigator.wakeLock.request('screen');
+    lock.addEventListener('release',()=>{lock=null})}catch(e){want=false}label()}
+  b.onclick=async()=>{want=!want;
+    if(want)await acquire();
+    else if(lock){await lock.release();lock=null;label()}else label()};
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='visible'&&want&&!lock)acquire()});
+  label();
+})();
+</script>
+</body>
+</html>
