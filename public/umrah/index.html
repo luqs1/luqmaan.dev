@@ -284,13 +284,32 @@ nav button:focus-visible{outline:3px solid var(--crimson);outline-offset:-3px}
   padding:9px 11px;min-height:40px;cursor:pointer}
 .wake.on{background:var(--indigo);color:#fff;border-color:var(--indigo)}
 .hdrow{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+/* ---- sources ---- */
+.srclink{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px}
+.srcfoot{display:block;margin:4px 0 0;background:none;border:0;padding:8px 0;cursor:pointer;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.06em;
+  color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+.back{background:none;border:0;padding:0 0 12px;cursor:pointer;font-family:"Archivo",sans-serif;
+  font-size:15px;font-weight:700;color:var(--indigo)}
+.lede{font-size:16.5px;color:var(--ink-2);margin:0 0 11px}
+.lede a,.refs a{color:var(--indigo)}
+.books{margin:0}
+.books dt{font-family:"Archivo",sans-serif;font-weight:700;font-size:15px;margin-top:10px}
+.books dt:first-child{margin-top:0}
+.books dd{margin:2px 0 0;font-size:16px;line-height:1.35}
+.refs{list-style:none;padding:0}
+.refs li{font-size:16.5px;line-height:1.35;margin-bottom:11px}
+.refs .cite{display:block;font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;
+  color:var(--indigo);margin-top:2px}
+.srcsec h3 .mono{color:var(--indigo)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
 <header>
-  <p class="eyebrow">Shafi'i madhhab</p>
+  <p class="eyebrow">Shafi'i madhhab · <button class="srclink" data-go="src-top">Sources</button></p>
   <div class="hdrow">
     <h1>Umrah field guide</h1>
     <button class="wake" id="wake" hidden>Keep awake</button>
@@ -366,6 +385,7 @@ nav button:focus-visible{outline:3px solid var(--crimson);outline-offset:-3px}
     <p class="tl3">Allahumma zid hadhal-bayta tashrifan wa ta'ziman wa takriman wa mahabah, wa zid man sharrafahu wa 'azzamahu mimman hajjahu wa'tamarahu tashrifan wa takriman wa ta'ziman wa birra</p>
     <p class="mn3">O Allah, increase this House in honour, reverence, nobility and awe. And increase those who honour and revere it, of those who come to it for hajj and umrah, in honour, nobility, reverence and righteousness.</p>
   </div>
+  <button class="srcfoot" data-go="src-p1">Sources for this section ›</button>
 </section>
 
 <!-- 2 TAWAF -->
@@ -423,6 +443,7 @@ nav button:focus-visible{outline:3px solid var(--crimson);outline-offset:-3px}
     <h3>Then two rak'ahs <span class="tag t-sunnah">Sunnah</span></h3>
     <p>Cover your right shoulder first. Pray behind the <button class="term" data-t="maqam">Maqam</button>, or anywhere in the Haram if it's crowded. Uncover the shoulder again for sa'y.</p>
   </div>
+  <button class="srcfoot" data-go="src-p2">Sources for this section ›</button>
 </section>
 
 <!-- 3 SA'Y -->
@@ -475,6 +496,7 @@ nav button:focus-visible{outline:3px solid var(--crimson);outline-offset:-3px}
       <li>Men walk briskly between the green markers, and keep the right shoulder bare (idtiba').</li>
     </ul>
   </div>
+  <button class="srcfoot" data-go="src-p3">Sources for this section ›</button>
 </section>
 
 <!-- 4 HALQ -->
@@ -506,6 +528,106 @@ nav button:focus-visible{outline:3px solid var(--crimson);outline-offset:-3px}
       <li>Do it when you are about to leave, as its own tawaf. Your umrah tawaf does not count for it.</li>
       <li>Left without it? Go back and do it before reaching qasr distance. Otherwise a <button class="term" data-t="dam">dam</button> is owed.</li>
       <li>Women in menstruation or post-natal bleeding are exempt.</li>
+    </ul>
+  </div>
+  <button class="srcfoot" data-go="src-p4">Sources for this section ›</button>
+</section>
+
+<!-- SOURCES -->
+<section class="panel" id="p5">
+  <button class="back" id="srcBack">‹ Back to the guide</button>
+  <div class="head"><span class="num">§</span><h2>Sources</h2></div>
+  <p class="lede">Every point in this guide was checked against the Shafi'i works below, read in the <a href="https://github.com/OpenITI/RELEASE" rel="noopener" target="_blank">OpenITI</a> digital library (the corpus <a href="https://usul.ai" rel="noopener" target="_blank">usul.ai</a> is built on). Page numbers follow the printed editions the texts were digitised from, and may be off by one.</p>
+  <p class="lede">This is a list of sources, not a fatwa. Take questions about your own situation to a qualified teacher.</p>
+
+  <div class="block fill">
+    <h3>The books</h3>
+    <dl class="books">
+      <dt>Idah</dt><dd>al-Nawawi (d. 676 AH), <i>al-Idah fi Manasik al-Hajj wa al-'Umra</i>. His manual of the rites of hajj and umrah, and the main source here. Dar al-Basha'ir, Beirut.</dd>
+      <dt>Minhaj</dt><dd>al-Nawawi, <i>Minhaj al-Talibin</i>. The school's core legal text. Pages follow its printing with <i>Mughni al-Muhtaj</i>.</dd>
+      <dt>Majmu'</dt><dd>al-Nawawi, <i>al-Majmu' Sharh al-Muhadhdhab</i>. His long commentary, with the hadith evidence and gradings.</dd>
+      <dt>Tuhfa</dt><dd>Ibn Hajar al-Haytami (d. 974 AH), <i>Tuhfat al-Muhtaj</i>. With <i>Nihaya</i>, the reference for the school's relied-upon position. al-Maktaba al-Tijariyya, Cairo.</dd>
+      <dt>Nihaya</dt><dd>Shams al-Din al-Ramli (d. 1004 AH), <i>Nihayat al-Muhtaj</i>. Dar al-Fikr, Beirut.</dd>
+      <dt>Mughni</dt><dd>al-Khatib al-Shirbini (d. 977 AH), <i>Mughni al-Muhtaj</i>. Dar al-Kutub al-'Ilmiyya.</dd>
+      <dt>Fath al-Mu'in</dt><dd>Zayn al-Din al-Malibari (d. 987 AH). Dar Ibn Hazm.</dd>
+      <dt>Jamal</dt><dd>Sulayman al-Jamal (d. 1204 AH), <i>Hashiyat al-Jamal</i>. Dar al-Fikr.</dd>
+      <dt>Bughya</dt><dd>'Abd al-Rahman Ba'alawi (d. 1320 AH), <i>Bughyat al-Mustarshidin</i>. Fatwas of Hadrami Shafi'i scholars.</dd>
+    </dl>
+  </div>
+
+  <div class="block srcsec" id="src-p1">
+    <h3><span class="mono">01</span> Ihram</h3>
+    <ul class="refs">
+      <li>The intention is the ihram. Saying it aloud, and the talbiyah, are not required.<span class="cite">Idah p. 132</span></li>
+      <li>Ghusl is sunnah, including for a woman in menstruation.<span class="cite">Idah p. 125 · Tuhfa 4:56</span></li>
+      <li>Perfume the body rather than the cloth. Two rak'ahs for ihram.<span class="cite">Idah p. 128, p. 130</span></li>
+      <li>The talbiyah, and men saying it aloud.<span class="cite">Idah p. 142, p. 144</span></li>
+      <li>Entering ihram before the miqat, or when level with it.<span class="cite">Idah p. 120 · Tuhfa 4:41</span></li>
+      <li>Passing the miqat without ihram: going back, and when a dam is owed.<span class="cite">Idah p. 121 · Minhaj 2:227</span></li>
+      <li>Prohibitions, and the choice of sheep, feeding six, or fasting three days.<span class="cite">Idah p. 476</span></li>
+      <li>Marriage contract void. Being a witness allowed.<span class="cite">Idah p. 167</span></li>
+      <li>Intercourse, and kissing or touching with desire.<span class="cite">Idah p. 169, p. 170</span></li>
+      <li>Men: enclosing clothing, the head, the face.<span class="cite">Idah p. 146, p. 148</span></li>
+      <li>Men: footwear.<span class="cite">Idah p. 149, p. 155 · Tuhfa 4:164</span></li>
+      <li>Belt, money belt and ring. Not knotting the rida'.<span class="cite">Idah p. 150, p. 151</span></li>
+      <li>Women: the face and gloves.<span class="cite">Idah p. 151 · Minhaj 2:294</span></li>
+      <li>Du'a on first seeing the Kaaba.<span class="cite">Idah p. 201</span></li>
+      <li>Du'a on entering the Masjid.<span class="cite">Idah p. 203</span></li>
+    </ul>
+  </div>
+  <div class="block srcsec" id="src-p2">
+    <h3><span class="mono">02</span> Tawaf</h3>
+    <ul class="refs">
+      <li>Wudu, clean body and clothes, awrah covered.<span class="cite">Minhaj 2:243</span></li>
+      <li>If wudu breaks, renew it and carry on.<span class="cite">Minhaj 2:243 · Idah p. 242</span></li>
+      <li>Contact in the crowd: the relied-upon ruling. It breaks wudu, also for the person touched, and for both if you collide.<span class="cite">Idah p. 220, p. 221 · Minhaj 1:145</span></li>
+      <li>Contact in the crowd: the weaker view that the person touched keeps wudu.<span class="cite">Majmu' 2:26</span></li>
+      <li>Contact in the crowd: following another recognised opinion in real hardship.<span class="cite">Bughya p. 18 · <a href="https://muftiwp.gov.my/ms/artikel/al-kafi-li-al-fatawi/1331-al-kafi-421-bersentuhan-antara-lelaki-dan-wanita-ketika-tawaf-adakah-membatalkan-wudhu" rel="noopener" target="_blank">Mufti of the Federal Territories, Malaysia, al-Kafi #421</a></span></li>
+      <li>Unsure whether you touched skin: wudu stands.<span class="cite">Fath al-Mu'in 1:62</span></li>
+      <li>Seven circuits. If unsure, go with the lower count.<span class="cite">Idah p. 223</span></li>
+      <li>The Hijr is part of the House.<span class="cite">Idah p. 226</span></li>
+      <li>Idtiba': all seven circuits and during sa'y, removed for the two rak'ahs.<span class="cite">Idah p. 232 · Tuhfa 4:90</span></li>
+      <li>Ramal: the first three circuits, and what to do when crowded.<span class="cite">Idah p. 233, p. 234 · Jamal 2:440</span></li>
+      <li>Touching and pointing: the Black Stone and the Yamani corner.<span class="cite">Idah p. 238 · Tuhfa 4:86</span></li>
+      <li>Black Stone du'a at each circuit.<span class="cite">Idah p. 239</span></li>
+      <li>Rabbana atina between the Yamani corner and the Stone.<span class="cite">Idah p. 240 · Majmu' 8:37</span></li>
+      <li>Iraqi corner, Mizab and Shami corner du'as.<span class="cite">Mughni 2:249 · Idah p. 239</span></li>
+      <li>Two rak'ahs, with al-Kafirun and al-Ikhlas.<span class="cite">Idah p. 246</span></li>
+      <li>Verse 2:125 at the Maqam (hadith of Jabir).<span class="cite">Majmu' 8:50</span></li>
+      <li>When to visit the Multazam.<span class="cite">Idah p. 252</span></li>
+      <li>Zamzam.<span class="cite">Idah p. 400 · Mughni 2:282</span></li>
+    </ul>
+  </div>
+  <div class="block srcsec" id="src-p3">
+    <h3><span class="mono">03</span> Sa'y</h3>
+    <ul class="refs">
+      <li>Must come after a valid tawaf.<span class="cite">Idah p. 258</span></li>
+      <li>Start at Safa.<span class="cite">Idah p. 257</span></li>
+      <li>Wudu recommended, not required.<span class="cite">Idah p. 260</span></li>
+      <li>Men hurry between the green markers.<span class="cite">Idah p. 254</span></li>
+      <li>Dhikr and du'a at Safa, three times.<span class="cite">Idah p. 254</span></li>
+      <li>Du'a during sa'y.<span class="cite">Idah p. 260</span></li>
+      <li>Verse 2:158 at Safa.<span class="cite">Sahih Muslim (hadith of Jabir). Not found in the texts above.</span></li>
+    </ul>
+  </div>
+  <div class="block srcsec" id="src-p4">
+    <h3><span class="mono">04</span> Halq</h3>
+    <ul class="refs">
+      <li>The four pillars, and their order.<span class="cite">Idah p. 376, p. 386 · Tuhfa 4:146</span></li>
+      <li>Three hairs minimum.<span class="cite">Idah p. 343</span></li>
+      <li>Shaving is better for men, and the hajj exception.<span class="cite">Idah p. 342 · Tuhfa 4:119</span></li>
+      <li>Women trim a fingertip's length.<span class="cite">Idah p. 348</span></li>
+      <li>No hair on the head.<span class="cite">Idah p. 344</span></li>
+      <li>A dam cannot replace a pillar.<span class="cite">Idah p. 376</span></li>
+      <li>Ihram fully lifted.<span class="cite">Idah p. 386</span></li>
+      <li>The farewell tawaf.<span class="cite">Tuhfa 4:139 · Nihaya 3:316 · Idah p. 405, p. 407</span></li>
+    </ul>
+  </div>
+  <div class="block srcsec" id="src-gl">
+    <h3><span class="mono">›</span> Word definitions</h3>
+    <ul class="refs">
+      <li>Dam: owed for a missed wajib; nothing owed for a sunnah.<span class="cite">Idah p. 377 · Mughni 2:285</span></li>
+      <li>Menstruation: what she may and may not do.<span class="cite">Idah p. 125 · Minhaj 1:279</span></li>
     </ul>
   </div>
 </section>
@@ -739,12 +861,22 @@ stage.addEventListener('pointerup',endDrag);
 stage.addEventListener('pointercancel',endDrag);
 
 /* ================= section nav ================= */
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+let current='p1';
+function show(id){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
-  document.getElementById(b.dataset.p).classList.add('on');
-  document.querySelectorAll('nav button').forEach(x=>x.removeAttribute('aria-current'));
-  b.setAttribute('aria-current','true');window.scrollTo(0,0);
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('nav button').forEach(x=>x.dataset.p===id?x.setAttribute('aria-current','true'):x.removeAttribute('aria-current'));
+  if(id!=='p5')current=id;
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.p));
+/* sources page: header link opens the top, section links jump to that section */
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');if(!g)return;
+  show('p5');
+  if(g.dataset.go!=='src-top'){const t=document.getElementById(g.dataset.go);if(t)t.scrollIntoView()}
 });
+document.getElementById('srcBack').onclick=()=>show(current);
 
 /* ================= count persistence =================
    Saved on this device, so counts survive a reload. */
