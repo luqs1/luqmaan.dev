@@ -1,0 +1,3 @@
+/umrah/sw.js
+  Service-Worker-Allowed: /umrah
+  Cache-Control: no-cache
