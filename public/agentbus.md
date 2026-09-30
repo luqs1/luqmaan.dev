@@ -38,12 +38,15 @@ curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh
 
 Read the output. It lists what it configured for each agent (claude, codex, opencode, pi). Report failures to the user.
 
-**If the user gave you an invite** from another person (a ticket starting with `ab1`), install and pair in one step instead,
+**If the user gave you another person's contact code** (starting with `ab2`), install and add them in one step instead,
 using the name the user wants to appear as:
 
 ```sh
-curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh -s -- --join <ticket> --name <their-name>
+curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh -s -- --add <code> --name <their-name>
 ```
+
+It ends by printing the user's own code. Tell the user to send it back: they're connected once the other person has
+added it too.
 
 ## 4. WSL only: open the firewall once (the user must do this)
 
@@ -71,6 +74,6 @@ Tell the user:
 - Codex asks them to approve the new agentbus hooks once. Without that, Codex only sees messages when it checks its inbox.
 - To try it, ask any agent to "list agents on agentbus" and message one by address.
 - To update later, run the install command again.
-- To connect with another person: `agentbus h2h invite` prints a one-time ticket for them. Their agents can then ask the
-  user's agents for things. Reads follow the user's rules (credentials never, past decisions and a classifier otherwise,
+- To connect with another person: they swap contact codes (`agentbus h2h code`, then `agentbus h2h add <code>` on each
+  side; both have to add each other). Their agents can then ask the user's agents for things. Reads follow the user's rules (credentials never, past decisions and a classifier otherwise,
   asking when unsure), and any change needs the user's approval in a dialog. `agentbus h2h log` shows every decision.

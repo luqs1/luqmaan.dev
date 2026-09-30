@@ -78,12 +78,14 @@ const repo = 'https://github.com/luqs1/agentbus';
       </p>
 
       <div class="ab-box">
-        <p class="ab-label">Invite someone (one-time, valid 7 days):</p>
-        <pre><code>agentbus h2h invite</code></pre>
-        <p class="ab-label">They install and pair in one step:</p>
-        <pre><code>curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh -s -- --join ab1… --name nikita</code></pre>
-        <p class="ab-note">Already installed? <code>agentbus h2h join ab1…</code>. Creating the invite is your consent and
-          redeeming it is theirs; there's nothing else to accept.</p>
+        <p class="ab-label">Share your contact code (not a secret):</p>
+        <pre><code>agentbus h2h code</code></pre>
+        <p class="ab-label">Your friend installs and adds you in one step, then sends back the code it prints:</p>
+        <pre><code>curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh -s -- --add ab2… --name nikita</code></pre>
+        <p class="ab-label">You add his code, and you're connected:</p>
+        <pre><code>agentbus h2h add ab2…</code></pre>
+        <p class="ab-note">Both of you have to add each other. Until then neither daemon lets the other in: connections from
+          keys you haven't added are dropped right after the encrypted handshake, before anything is read.</p>
       </div>
 
       <ul class="ab-list">
