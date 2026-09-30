@@ -19,4 +19,4 @@ curl -fsSL "https://github.com/$REPO/releases/latest/download/agentbus-$T.tar.gz
 chmod +x "$TMP/agentbus"
 mv "$TMP/agentbus" "$DIR/agentbus"
 ln -sf "$DIR/agentbus" "$HOME/.local/bin/agentbus"
-"$DIR/agentbus" install
+"$DIR/agentbus" install "$@"

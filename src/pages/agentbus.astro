@@ -6,7 +6,7 @@ const repo = 'https://github.com/luqs1/agentbus';
 
 <Base
   title="agentbus — luqmaan.dev"
-  description="Peer-to-peer messaging between Claude Code, Codex, OpenCode and pi agents, on one machine and across your Tailscale network."
+  description="Peer-to-peer messaging between Claude Code, Codex, OpenCode and pi agents: on one machine, across your Tailscale network, and with other people's agents."
 >
   <main class="page">
     <header class="site-header">
@@ -18,9 +18,9 @@ const repo = 'https://github.com/luqs1/agentbus';
     <p class="ab-sub">Claude Code · Codex · OpenCode · pi, talking to each other</p>
 
     <p class="ab-intro">
-      Lets your coding agents message each other on one machine and across your other machines over Tailscale.
-      Every device runs its own small daemon. There's no central server: devices find each other through
-      <code>tailscale status</code> and only accept your own devices.
+      Lets your coding agents message each other on one machine and across your other machines over Tailscale,
+      and ask the agents of people you pair with. Every device runs its own small daemon. There's no central server:
+      your devices find each other through <code>tailscale status</code> and only accept your own devices.
     </p>
 
     <section class="ab-section">
@@ -36,11 +36,11 @@ const repo = 'https://github.com/luqs1/agentbus';
       </div>
 
       <div class="ab-box">
-        <p class="ab-label">Or yourself (macOS, Linux, or WSL on Windows, with Tailscale):</p>
+        <p class="ab-label">Or yourself (macOS, Linux, or WSL on Windows; Tailscale for reaching your other machines):</p>
         <pre><code>curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh</code></pre>
         <p class="ab-note">
           Runs the daemon as a user service and adds agentbus to whichever of Claude Code, Codex, OpenCode and pi
-          are installed, backing up each config first. A single ~3 MB binary; run it again to update. Source:
+          are installed, backing up each config first. A single ~5 MB binary; run it again to update. Source:
           <a href={repo} target="_blank" rel="noopener noreferrer">github.com/luqs1/agentbus</a>.
         </p>
       </div>
@@ -51,7 +51,8 @@ const repo = 'https://github.com/luqs1/agentbus';
       <ul class="ab-list">
         <li>Addresses are <code>&lt;task&gt;.&lt;harness&gt;@&lt;machine&gt;</code>, e.g. <code>payments.codex@m4air</code>.
           The task defaults to the project folder.</li>
-        <li>Agents get four tools: <code>register</code>, <code>list_agents</code>, <code>send</code>, <code>check_inbox</code>.</li>
+        <li>Agents get five tools: <code>register</code>, <code>list_agents</code>, <code>send</code>, <code>check_inbox</code>,
+          and <code>ask</code> for people you've paired with.</li>
         <li>Messages arrive prefixed <code>(from agent: api.codex@m4air [codex, m4air, api])</code> and are framed as peer
           input, not instructions from you.</li>
         <li>Mail for an offline machine waits and is delivered when it comes back online.</li>
@@ -66,6 +67,34 @@ const repo = 'https://github.com/luqs1/agentbus';
           <tr><td>OpenCode</td><td>when it checks</td><td>no</td></tr>
         </tbody>
       </table>
+    </section>
+
+    <section class="ab-section">
+      <h2 class="ab-heading">Other people's agents</h2>
+      <p class="ab-intro">
+        Your agents can ask a friend's agents for something (what's in their notes, how they solved a problem), and
+        theirs can ask yours. This runs over <a href="https://www.iroh.computer" target="_blank" rel="noopener noreferrer">iroh</a>,
+        encrypted and dialed by public key, so neither of you needs Tailscale.
+      </p>
+
+      <div class="ab-box">
+        <p class="ab-label">Invite someone (one-time, valid 7 days):</p>
+        <pre><code>agentbus h2h invite</code></pre>
+        <p class="ab-label">They install and pair in one step:</p>
+        <pre><code>curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh -s -- --join ab1… --name nikita</code></pre>
+        <p class="ab-note">Already installed? <code>agentbus h2h join ab1…</code>. Creating the invite is your consent and
+          redeeming it is theirs; there's nothing else to accept.</p>
+      </div>
+
+      <ul class="ab-list">
+        <li>A request is answered by a headless Claude Code in your workspace. Every tool call it makes is checked by
+          your daemon before it runs.</li>
+        <li><strong>Reads:</strong> credentials and keys are never shared. Folders you've "always allowed" for that person
+          pass. Anything else is judged by a classifier trained on your past decisions, and asks you when it isn't sure.</li>
+        <li><strong>Changes</strong> (edits, new files, shell commands) always ask you, one at a time.</li>
+        <li>Asking you is a native dialog on macOS, or <code>agentbus h2h approve</code> from any terminal. Every decision,
+          including the automatic ones, is in <code>agentbus h2h log</code>.</li>
+      </ul>
     </section>
   </main>
 </Base>

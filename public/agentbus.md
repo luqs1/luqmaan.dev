@@ -1,10 +1,11 @@
 # Install agentbus (instructions for an AI agent)
 
 agentbus lets AI coding agents (Claude Code, Codex, OpenCode, pi) message each other on one machine and across
-the user's other machines over Tailscale. Every device runs its own small daemon; there is no central server.
-Agents get addresses like `payments.codex@m4air` (`<task>.<harness>@<machine>`).
+the user's other machines over Tailscale, and ask the agents of other people the user pairs with (over iroh, no
+Tailscale needed). Every device runs its own small daemon; there is no central server. Agents get addresses like
+`payments.codex@m4air` (`<task>.<harness>@<machine>`).
 
-Source: https://github.com/luqs1/agentbus (a single ~3 MB binary, no runtime needed)
+Source: https://github.com/luqs1/agentbus (a single ~5 MB binary, no runtime needed)
 
 You are installing it on the machine you are running on. Follow these steps in order.
 
@@ -26,7 +27,8 @@ Do not continue without the user's agreement.
   inside WSL. Windows desktop apps such as Codex are wired up from WSL automatically, and WSL is set to start at login.
 - **Tailscale:** `tailscale status` should show this machine logged in. On WSL the CLI may be at
   `"/mnt/c/Program Files/Tailscale/tailscale.exe"`; on macOS at `/Applications/Tailscale.app/Contents/MacOS/Tailscale`.
-  Without Tailscale, agentbus still works between agents on this machine only.
+  Without Tailscale, agentbus still works between agents on this machine and with people the user pairs with, but
+  not with the user's other machines.
 
 ## 3. Install
 
@@ -35,6 +37,13 @@ curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh
 ```
 
 Read the output. It lists what it configured for each agent (claude, codex, opencode, pi). Report failures to the user.
+
+**If the user gave you an invite** from another person (a ticket starting with `ab1`), install and pair in one step instead,
+using the name the user wants to appear as:
+
+```sh
+curl -fsSL https://luqmaan.dev/agentbus/install.sh | sh -s -- --join <ticket> --name <their-name>
+```
 
 ## 4. WSL only: open the firewall once (the user must do this)
 
@@ -62,3 +71,6 @@ Tell the user:
 - Codex asks them to approve the new agentbus hooks once. Without that, Codex only sees messages when it checks its inbox.
 - To try it, ask any agent to "list agents on agentbus" and message one by address.
 - To update later, run the install command again.
+- To connect with another person: `agentbus h2h invite` prints a one-time ticket for them. Their agents can then ask the
+  user's agents for things. Reads follow the user's rules (credentials never, past decisions and a classifier otherwise,
+  asking when unsure), and any change needs the user's approval in a dialog. `agentbus h2h log` shows every decision.
