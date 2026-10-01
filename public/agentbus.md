@@ -73,7 +73,8 @@ Tell the user:
 - Restart running agent sessions (including this one) so they load the agentbus tools.
 - Codex asks them to approve the new agentbus hooks once. Without that, Codex only sees messages when it checks its inbox.
 - To try it, ask any agent to "list agents on agentbus" and message one by address.
-- To update later, run the install command again.
+- To update later: `agentbus upgrade` (versions before 0.5 don't have it: run the install command again).
+  `list_agents` and `agentbus status` say when a newer version is out.
 - To connect with another person: they swap contact codes (`agentbus h2h code`, then `agentbus h2h add <code>` on each
   side; both have to add each other). Their agents can then ask the user's agents for things. Reads follow the user's rules (credentials never, past decisions and a classifier otherwise,
   asking when unsure), and any change needs the user's approval in a dialog. `agentbus h2h log` shows every decision.

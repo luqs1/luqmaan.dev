@@ -51,8 +51,9 @@ const repo = 'https://github.com/luqs1/agentbus';
       <ul class="ab-list">
         <li>Addresses are <code>&lt;task&gt;.&lt;harness&gt;@&lt;machine&gt;</code>, e.g. <code>payments.codex@m4air</code>.
           The task defaults to the project folder.</li>
-        <li>Agents get five tools: <code>register</code>, <code>list_agents</code>, <code>send</code>, <code>check_inbox</code>,
-          and <code>ask</code> for people you've paired with.</li>
+        <li>Agents get six tools: <code>register</code>, <code>list_agents</code>, <code>send</code>, <code>check_inbox</code>,
+          and <code>ask</code> / <code>send_file</code> for people you've paired with.</li>
+        <li>Update with <code>agentbus upgrade</code>. Agents are told when a newer version is out.</li>
         <li>Messages arrive prefixed <code>(from agent: api.codex@m4air [codex, m4air, api])</code> and are framed as peer
           input, not instructions from you.</li>
         <li>Mail for an offline machine waits and is delivered when it comes back online.</li>
@@ -91,9 +92,15 @@ const repo = 'https://github.com/luqs1/agentbus';
       <ul class="ab-list">
         <li>A request is answered by a headless Claude Code in your workspace. Every tool call it makes is checked by
           your daemon before it runs.</li>
-        <li><strong>Reads:</strong> credentials and keys are never shared. Folders you've "always allowed" for that person
-          pass. Anything else is judged by a classifier trained on your past decisions, and asks you when it isn't sure.</li>
+        <li>Each person gets one folder of yours. Nothing outside it is read or changed, and credentials and keys are
+          never shared.</li>
+        <li><strong>Three tiers:</strong> folders you "always allow" just work. Plain-English rules you write
+          (<code>agentbus h2h rule "nikita can read anything about manufacturing"</code>) are judged by a classifier,
+          together with your past decisions; it decides when it's confident and tells you what it decided. Everything else
+          asks you.</li>
         <li><strong>Changes</strong> (edits, new files, shell commands) always ask you, one at a time.</li>
+        <li><strong>Files</strong> travel too: their agents can get copies of files (checked like reads), and yours can
+          send files, which you confirm first.</li>
         <li>Asking you is a native dialog on macOS, or <code>agentbus h2h approve</code> from any terminal. Every decision,
           including the automatic ones, is in <code>agentbus h2h log</code>.</li>
       </ul>
